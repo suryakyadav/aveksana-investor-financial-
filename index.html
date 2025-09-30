@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aveksana Interactive Financial Model</title>
+    <!-- Chosen Palette: Calm Harmony (Warm Neutrals & Deep Teal) -->
+    <!-- Application Structure Plan: A single-page interactive dashboard translating the financial model into a narrative. Sections cover Investment Overview, Revenue Growth, Expense Plan, and Cash Flow. The core interaction is a set of sliders for key assumptions that dynamically update all charts and KPIs on the page, allowing investors to stress-test the model. This structure prioritizes high-level synthesis over raw data tables for better usability. -->
+    <!-- Visualization & Content Choices: Revenue Forecast -> Goal: Change -> Stacked Area Chart -> Interaction: Hover tooltips, real-time updates from assumption sliders -> Justification: More intuitive than a table for showing growth trends -> Library: Chart.js. Expense Plan -> Goal: Inform -> Donut Chart -> Interaction: Hover tooltips -> Justification: Clear visualization of budget allocation -> Library: Chart.js. Cash Flow -> Goal: Change -> Line Chart -> Interaction: Hover tooltips -> Justification: Standard, clear way to show burn and runway -> Library: Chart.js. Key Assumptions -> Goal: Explore Relationships -> Sliders/Inputs -> Interaction: On change, update all page data -> Justification: Empowers investors to explore scenarios, building trust and engagement -> Library: Vanilla JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #1f2937;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            max-height: 50vh;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #0d9488;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #0d9488;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-stone-50">
+
+    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 border-b border-stone-200">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-2xl font-bold text-teal-700">Aveksana</h1>
+            <p class="text-sm text-gray-500">Seed Round Interactive Financial Model</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-16">
+
+        <section id="overview" class="mb-16">
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div class="bg-white p-6 rounded-lg border border-stone-200">
+                    <p class="text-gray-500 text-sm font-medium">Investment Ask</p>
+                    <p class="text-4xl font-extrabold text-teal-700">€1.5M</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-stone-200">
+                    <p class="text-gray-500 text-sm font-medium">Projected ARR (Year 2)</p>
+                    <p id="kpi-arr" class="text-4xl font-extrabold text-teal-700">€0</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-stone-200">
+                    <p class="text-gray-500 text-sm font-medium">Projected Runway</p>
+                    <p id="kpi-runway" class="text-4xl font-extrabold text-teal-700">0 mos</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="assumptions" class="mb-16">
+            <div class="bg-white p-8 rounded-lg border border-stone-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Interactive Assumptions</h2>
+                <p class="text-gray-600 mb-6 max-w-3xl">This is a live model. Adjust the sliders for our key growth drivers to see how they impact our financial projections in real-time. This allows you to stress-test our plan and explore different scenarios.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
+                    <div>
+                        <label for="userGrowth" class="font-medium text-gray-700">Monthly User Growth</label>
+                        <div class="flex items-center space-x-3 mt-1">
+                            <input type="range" id="userGrowth" min="5" max="25" value="15" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
+                            <span id="userGrowthValue" class="font-bold text-teal-700 w-16 text-right">15%</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="conversionRate" class="font-medium text-gray-700">B2C Conversion Rate</label>
+                        <div class="flex items-center space-x-3 mt-1">
+                            <input type="range" id="conversionRate" min="1" max="5" value="2.5" step="0.1" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
+                            <span id="conversionRateValue" class="font-bold text-teal-700 w-16 text-right">2.5%</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="b2bDeals" class="font-medium text-gray-700">B2B Deals / Rep / Qtr</label>
+                        <div class="flex items-center space-x-3 mt-1">
+                            <input type="range" id="b2bDeals" min="1" max="4" value="2" step="0.5" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
+                            <span id="b2bDealsValue" class="font-bold text-teal-700 w-16 text-right">2.0</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="b2bAcv" class="font-medium text-gray-700">Avg. B2B ACV (€)</label>
+                        <div class="flex items-center space-x-3 mt-1">
+                            <input type="range" id="b2bAcv" min="20000" max="50000" value="30000" step="1000" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
+                            <span id="b2bAcvValue" class="font-bold text-teal-700 w-16 text-right">€30k</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="grid lg:grid-cols-2 gap-12">
+            <div id="revenue" class="bg-white p-8 rounded-lg border border-stone-200">
+                 <h2 class="text-2xl font-bold text-gray-800 mb-1">Revenue Growth</h2>
+                 <p class="text-gray-600 mb-6">Projected Monthly Recurring Revenue (MRR) over 24 months, broken down by our B2C and B2B streams.</p>
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <div id="cashflow" class="bg-white p-8 rounded-lg border border-stone-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-1">Cash Flow & Runway</h2>
+                <p class="text-gray-600 mb-6">Our projected cash balance over the next 24 months, illustrating our burn rate and runway from the €1.5M seed investment.</p>
+                <div class="chart-container">
+                    <canvas id="cashflowChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 mt-12">
+            <div id="expenses" class="bg-white p-8 rounded-lg border border-stone-200">
+                 <h2 class="text-2xl font-bold text-gray-800 mb-1">Expense Breakdown</h2>
+                 <p class="text-gray-600 mb-6">A breakdown of our projected monthly operating expenses at the end of Year 2, mirroring our strategic "Use of Funds".</p>
+                <div class="chart-container">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+
+            <div id="headcount" class="bg-white p-8 rounded-lg border border-stone-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-1">Headcount Plan</h2>
+                <p class="text-gray-600 mb-6">Our strategic hiring plan over 24 months, scaling the team to execute on our product and sales roadmap.</p>
+                <div class="chart-container">
+                    <canvas id="headcountChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    
+    <footer class="border-t border-stone-200 mt-16">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500 text-sm">
+            <p>&copy; 2025 Aveksana. This is a forward-looking financial model for discussion purposes only.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let revenueChart, cashflowChart, expenseChart, headcountChart;
+
+    const assumptions = {
+        investment: 1500000,
+        startUsers: 22000,
+        userGrowthRate: 0.15,
+        conversionRate: 0.025,
+        b2cPrice: 19.90,
+        b2bAcv: 30000,
+        salesCycleMonths: 6,
+        dealsPerRepPerQuarter: 2,
+        founderSalary: 70000,
+        b2bRepSalary: 60000,
+        engineerSalary: 65000,
+        pmSalary: 75000,
+        supportSalary: 45000,
+        payrollTax: 0.25,
+        commissionRate: 0.10,
+        marketingSpendRate: 0.15,
+        infraCostPer1kUsers: 50,
+        softwarePerEmployee: 200,
+        gaMonthly: 3000,
+        hiringPlan: {
+            b2bRep: [2, 6, 10, 14],
+            engineer: [3, 9, 15],
+            pm: [5],
+            support: [8]
+        }
+    };
+
+    const formatCurrency = (value) => {
+        if (Math.abs(value) >= 1000000) {
+            return `€${(value / 1000000).toFixed(1)}M`;
+        }
+        if (Math.abs(value) >= 1000) {
+            return `€${(value / 1000).toFixed(0)}k`;
+        }
+        return `€${value.toFixed(0)}`;
+    };
+
+    function calculateModel() {
+        let users = assumptions.startUsers;
+        const results = {
+            b2cMrr: [], b2bMrr: [], totalMrr: [], cashBalance: [],
+            gtmCosts: [], productCosts: [], adminCosts: [],
+            headcount: { founders: [], sales: [], engineering: [], product: [], support: [] }
+        };
+        
+        let currentCash = assumptions.investment;
+        let b2bCustomers = 4;
+        const salesReps = Array(25).fill(0);
+        const newDealsPipeline = Array(25).fill(0);
+
+        for (let month = 1; month <= 24; month++) {
+            if (month > 1) users *= (1 + assumptions.userGrowthRate);
+            
+            const payingUsers = users * assumptions.conversionRate;
+            const currentB2cMrr = payingUsers * assumptions.b2cPrice;
+            results.b2cMrr.push(currentB2cMrr);
+
+            let newB2bRepCount = assumptions.hiringPlan.b2bRep.filter(m => m === month).length;
+            for(let i=0; i<salesReps.length; i++) {
+                if(salesReps[i] === 0 && newB2bRepCount > 0) {
+                    salesReps[i] = 1; newB2bRepCount--;
+                }
+            }
+            const activeSalesReps = salesReps.reduce((a, b) => a + b, 0);
+
+            if(activeSalesReps > 0 && (month - 1) % 3 === 0) {
+                const dealsThisQuarter = activeSalesReps * assumptions.dealsPerRepPerQuarter;
+                const deliveryMonth = month + assumptions.salesCycleMonths;
+                if(deliveryMonth <= 24) newDealsPipeline[deliveryMonth] += dealsThisQuarter;
+            }
+            
+            b2bCustomers += newDealsPipeline[month] || 0;
+            const currentB2bMrr = (b2bCustomers * assumptions.b2bAcv) / 12;
+            results.b2bMrr.push(currentB2bMrr);
+            results.totalMrr.push(currentB2cMrr + currentB2bMrr);
+
+            const currentHeadcount = {
+                founders: 4,
+                sales: assumptions.hiringPlan.b2bRep.filter(m => m <= month).length,
+                engineering: 1 + assumptions.hiringPlan.engineer.filter(m => m <= month).length,
+                product: assumptions.hiringPlan.pm.filter(m => m <= month).length,
+                support: assumptions.hiringPlan.support.filter(m => m <= month).length
+            };
+            Object.keys(currentHeadcount).forEach(role => results.headcount[role].push(currentHeadcount[role]));
+            
+            const salaries = {
+                founders: (currentHeadcount.founders * assumptions.founderSalary) / 12,
+                sales: (currentHeadcount.sales * assumptions.b2bRepSalary) / 12,
+                engineering: (currentHeadcount.engineering * assumptions.engineerSalary) / 12,
+                product: (currentHeadcount.product * assumptions.pmSalary) / 12,
+                support: (currentHeadcount.support * assumptions.supportSalary) / 12
+            };
+            const totalEmployees = Object.values(currentHeadcount).reduce((a, b) => a + b, 0);
+
+            const gtm = (salaries.sales * (1 + assumptions.payrollTax)) + 
+                        (currentB2cMrr * assumptions.marketingSpendRate) + 
+                        ((newDealsPipeline[month] || 0) * assumptions.b2bAcv * assumptions.commissionRate);
+            
+            const product = (salaries.engineering * (1 + assumptions.payrollTax)) + 
+                            (salaries.product * (1 + assumptions.payrollTax)) +
+                            ((users / 1000) * assumptions.infraCostPer1kUsers);
+
+            const admin = (salaries.founders * (1 + assumptions.payrollTax)) +
+                          (salaries.support * (1 + assumptions.payrollTax)) +
+                          (totalEmployees * assumptions.softwarePerEmployee) +
+                          assumptions.gaMonthly;
+            
+            results.gtmCosts.push(gtm);
+            results.productCosts.push(product);
+            results.adminCosts.push(admin);
+            
+            const expense = gtm + product + admin;
+            currentCash += (currentB2cMrr + currentB2bMrr) - expense;
+            results.cashBalance.push(currentCash > 0 ? currentCash : 0);
+        }
+        return results;
+    }
+
+    function updateDashboard() {
+        const model = calculateModel();
+        
+        revenueChart.data.datasets[0].data = model.b2cMrr;
+        revenueChart.data.datasets[1].data = model.b2bMrr;
+        revenueChart.update();
+
+        cashflowChart.data.datasets[0].data = model.cashBalance;
+        cashflowChart.update();
+        
+        const lastMonthIndex = 23;
+        const totalExpensesLastMonth = model.gtmCosts[lastMonthIndex] + model.productCosts[lastMonthIndex] + model.adminCosts[lastMonthIndex];
+        expenseChart.data.datasets[0].data = [
+            (model.gtmCosts[lastMonthIndex] / totalExpensesLastMonth) * 100,
+            (model.productCosts[lastMonthIndex] / totalExpensesLastMonth) * 100,
+            (model.adminCosts[lastMonthIndex] / totalExpensesLastMonth) * 100,
+        ];
+        expenseChart.update();
+
+        headcountChart.data.datasets[0].data = model.headcount.founders;
+        headcountChart.data.datasets[1].data = model.headcount.sales;
+        headcountChart.data.datasets[2].data = model.headcount.engineering;
+        headcountChart.data.datasets[3].data = model.headcount.product;
+        headcountChart.data.datasets[4].data = model.headcount.support;
+        headcountChart.update();
+        
+        document.getElementById('kpi-arr').textContent = formatCurrency(model.totalMrr[lastMonthIndex] * 12);
+        
+        let runwayMonths = '24+';
+        for(let i = 0; i < model.cashBalance.length; i++) {
+            if (model.cashBalance[i] <= 0) {
+                runwayMonths = i;
+                break;
+            }
+        }
+        document.getElementById('kpi-runway').textContent = `${runwayMonths} mos`;
+    }
+
+    function createCharts() {
+        const labels = Array.from({ length: 24 }, (_, i) => `M${i + 1}`);
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        revenueChart = new Chart(revenueCtx, {
+            type: 'bar',
+            data: { labels, datasets: [
+                { label: 'B2C MRR', data: [], backgroundColor: '#14b8a6', stack: 'Stack 0' },
+                { label: 'B2B MRR', data: [], backgroundColor: '#0f766e', stack: 'Stack 0' }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: value => formatCurrency(value) } } }, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: c => `${c.dataset.label}: ${formatCurrency(c.raw)}` } } } }
+        });
+
+        const cashflowCtx = document.getElementById('cashflowChart').getContext('2d');
+        cashflowChart = new Chart(cashflowCtx, {
+            type: 'line',
+            data: { labels, datasets: [{ label: 'Cash Balance', data: [], borderColor: '#0d9488', backgroundColor: 'rgba(13, 148, 136, 0.1)', fill: true, tension: 0.1 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: value => formatCurrency(value) } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `Cash: ${formatCurrency(c.raw)}` } } } }
+        });
+
+        const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+        expenseChart = new Chart(expenseCtx, {
+            type: 'doughnut',
+            data: { 
+                labels: ['Go-to-Market', 'Product & Engineering', 'General & Admin'],
+                datasets: [{ data: [], backgroundColor: ['#0f766e', '#14b8a6', '#99f6e4'], borderColor: '#FDFBF8', borderWidth: 4 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.label}: ${c.raw.toFixed(1)}%` } } } }
+        });
+
+        const headcountCtx = document.getElementById('headcountChart').getContext('2d');
+        headcountChart = new Chart(headcountCtx, {
+            type: 'bar',
+            data: { labels, datasets: [
+                { label: 'Founders', data: [], backgroundColor: '#042f2e', stack: 'Stack 0'},
+                { label: 'Sales', data: [], backgroundColor: '#0f766e', stack: 'Stack 0'},
+                { label: 'Engineering', data: [], backgroundColor: '#14b8a6', stack: 'Stack 0'},
+                { label: 'Product', data: [], backgroundColor: '#5eead4', stack: 'Stack 0'},
+                { label: 'Support', data: [], backgroundColor: '#99f6e4', stack: 'Stack 0'}
+            ]},
+            options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, ticks: { stepSize: 2 } } }, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.dataset.label}: ${c.raw}` } } } }
+        });
+    }
+    
+    function setupEventListeners() {
+        const userGrowthSlider = document.getElementById('userGrowth');
+        const conversionRateSlider = document.getElementById('conversionRate');
+        const b2bDealsSlider = document.getElementById('b2bDeals');
+        const b2bAcvSlider = document.getElementById('b2bAcv');
+
+        userGrowthSlider.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            assumptions.userGrowthRate = value / 100;
+            document.getElementById('userGrowthValue').textContent = `${value}%`;
+            updateDashboard();
+        });
+
+        conversionRateSlider.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            assumptions.conversionRate = value / 100;
+            document.getElementById('conversionRateValue').textContent = `${value.toFixed(1)}%`;
+            updateDashboard();
+        });
+        
+        b2bDealsSlider.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            assumptions.dealsPerRepPerQuarter = value;
+            document.getElementById('b2bDealsValue').textContent = `${value.toFixed(1)}`;
+            updateDashboard();
+        });
+
+        b2bAcvSlider.addEventListener('input', (e) => {
+            const value = parseInt(e.target.value);
+            assumptions.b2bAcv = value;
+            document.getElementById('b2bAcvValue').textContent = `${formatCurrency(value)}`;
+            updateDashboard();
+        });
+    }
+
+    createCharts();
+    setupEventListeners();
+    updateDashboard();
+});
+</script>
+</body>
+</html>
