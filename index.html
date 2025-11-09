@@ -1,401 +1,410 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aveksana Interactive Financial Model</title>
-    <!-- Chosen Palette: Calm Harmony (Warm Neutrals & Deep Teal) -->
-    <!-- Application Structure Plan: A single-page interactive dashboard translating the financial model into a narrative. Sections cover Investment Overview, Revenue Growth, Expense Plan, and Cash Flow. The core interaction is a set of sliders for key assumptions that dynamically update all charts and KPIs on the page, allowing investors to stress-test the model. This structure prioritizes high-level synthesis over raw data tables for better usability. -->
-    <!-- Visualization & Content Choices: Revenue Forecast -> Goal: Change -> Stacked Area Chart -> Interaction: Hover tooltips, real-time updates from assumption sliders -> Justification: More intuitive than a table for showing growth trends -> Library: Chart.js. Expense Plan -> Goal: Inform -> Donut Chart -> Interaction: Hover tooltips -> Justification: Clear visualization of budget allocation -> Library: Chart.js. Cash Flow -> Goal: Change -> Line Chart -> Interaction: Hover tooltips -> Justification: Standard, clear way to show burn and runway -> Library: Chart.js. Key Assumptions -> Goal: Explore Relationships -> Sliders/Inputs -> Interaction: On change, update all page data -> Justification: Empowers investors to explore scenarios, building trust and engagement -> Library: Vanilla JS. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <title>Aveksana: 3-Year Financial Projections</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDFBF8;
-            color: #1f2937;
+            font-family: 'DM Sans', sans-serif;
+            background-color: #FAFAFA;
+            color: #7A7A7A;
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            max-height: 50vh;
+        .font-museo {
+            font-family: 'MuseoModerno', sans-serif;
         }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #0d9488;
-            cursor: pointer;
-            border-radius: 50%;
+        .tab-content {
+            display: none;
         }
-        input[type=range]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: #0d9488;
-            cursor: pointer;
-            border-radius: 50%;
+        .tab-content.active {
+            display: block;
         }
+        .tab.active {
+            border-bottom-color: #01949A;
+            color: #01949A;
+        }
+        .text-dark-teal { color: #003B3E; }
+        .bg-dark-teal { background-color: #003B3E; }
+        .text-teal { color: #016367; }
+        .bg-teal { background-color: #016367; }
+        .text-medium-teal { color: #01949A; }
+        .bg-medium-teal { background-color: #01949A; }
+        .text-seafoam { color: #49C3A3; }
+        .bg-seafoam { background-color: #49C3A3; }
+        .bg-light-gray-blue { background-color: #D9E3E5; }
+        .bg-light-grey { background-color: #E8E8E8; }
     </style>
 </head>
-<body class="bg-stone-50">
+<body>
 
-    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 border-b border-stone-200">
-        <div class="container mx-auto px-6 py-4">
-            <h1 class="text-2xl font-bold text-teal-700">Aveksana</h1>
-            <p class="text-sm text-gray-500">Seed Round Interactive Financial Model</p>
-        </div>
-    </header>
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div class="w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+            <!-- Header -->
+            <header class="bg-dark-teal text-white p-6 md:p-8">
+                <h1 class="font-museo text-5xl font-bold">Aveksana</h1>
+                <p class="text-slate-300 mt-1 text-lg">Interactive 3-Year Financial Projections</p>
+            </header>
 
-    <main class="container mx-auto px-6 py-12 md:py-16">
+            <!-- Tab Navigation -->
+            <nav class="border-b border-light-grey">
+                <ul class="flex flex-wrap -mb-px text-base font-bold text-gray-400">
+                    <li class="mr-2">
+                        <a href="#" class="tab active inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="story">The Story</a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="principles">Guiding Principles</a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="funds">Use of Funds</a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="projections">Projections</a>
+                    </li>
+                    <li>
+                        <a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="takeaways">Key Takeaways</a>
+                    </li>
+                </ul>
+            </nav>
 
-        <section id="overview" class="mb-16">
-            <div class="grid md:grid-cols-3 gap-6 text-center">
-                <div class="bg-white p-6 rounded-lg border border-stone-200">
-                    <p class="text-gray-500 text-sm font-medium">Investment Ask</p>
-                    <p class="text-4xl font-extrabold text-teal-700">€1.5M</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg border border-stone-200">
-                    <p class="text-gray-500 text-sm font-medium">Projected ARR (Year 2)</p>
-                    <p id="kpi-arr" class="text-4xl font-extrabold text-teal-700">€0</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg border border-stone-200">
-                    <p class="text-gray-500 text-sm font-medium">Projected Runway</p>
-                    <p id="kpi-runway" class="text-4xl font-extrabold text-teal-700">0 mos</p>
-                </div>
-            </div>
-        </section>
+            <!-- Content Area -->
+            <main class="p-6 md:p-8">
+                <!-- The Story Content -->
+                <div id="story" class="tab-content active">
+                    <h2 class="text-2xl font-bold text-teal mb-4">Our Bottom-Up Plan</h2>
+                    <p class="text-lg mb-6">Our financial plan is a bottom-up forecast, built directly from our specific hiring plan and go-to-market strategy—not high-level guesses. Here is the story it tells:</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-dark-teal mb-2">1. The Plan (Money Out / Expenses)</h3>
+                            <ul class="list-disc list-inside space-y-2 text-lg">
+                                <li><strong>Starting Point:</strong> We begin with €800,000 from the seed round.</li>
+                                <li><strong>Base Cost:</strong> Our "lights-on" cost for 3 founders & cofounders + €12k in operations is roughly €30,000/month (including 25% payroll tax).</li>
+                                <li><strong>The "Use of Funds":</strong> Our plan is to hire 5 new key people (3 Tech, 2 Commercial) in Q1 and Q2 of 2026.</li>
+                                <li><strong>Full Burn Rate:</strong> Once this 5-person team is hired, our total monthly burn rate (Base Cost + New Hires) averages out to ~€55,000 per month.</li>
+                            </ul>
+                        </div>
 
-        <section id="assumptions" class="mb-16">
-            <div class="bg-white p-8 rounded-lg border border-stone-200">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">Interactive Assumptions</h2>
-                <p class="text-gray-600 mb-6 max-w-3xl">This is a live model. Adjust the sliders for our key growth drivers to see how they impact our financial projections in real-time. This allows you to stress-test our plan and explore different scenarios.</p>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
-                    <div>
-                        <label for="userGrowth" class="font-medium text-gray-700">Monthly User Growth</label>
-                        <div class="flex items-center space-x-3 mt-1">
-                            <input type="range" id="userGrowth" min="5" max="25" value="15" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
-                            <span id="userGrowthValue" class="font-bold text-teal-700 w-16 text-right">15%</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-dark-teal mb-2">2. The Result (Money In / Revenue)</h3>
+                            <p class="text-lg mb-4">This new, larger team is what drives our revenue growth. The model projects two streams:</p>
+                            <ul class="list-disc list-inside space-y-2 text-lg ml-4">
+                                <li><strong>B2C Revenue (The Base):</strong> This stream grows linearly, driven by our marketing plan to add 3,000 to 6,000 new users per month. A small percentage (0.25%) of these convert, building a steady, predictable MRR base.</li>
+                                <li><strong>B2B Revenue (The Growth Driver):</strong> This is our main focus. Our new sales team has a 4.5-month ramp-up. Starting around Month 5, they begin to close 2-3 new €30,000/year deals per quarter. This is what creates the big jumps in revenue.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-dark-teal mb-2">3. The Grand Finale (The KPIs)</h3>
+                            <p class="text-lg mb-4">The model puts these two pieces together. It shows our expenses ramp up first (as we hire the team) and then our B2B revenue follows as that new team starts to execute.</p>
+                            <ul class="list-disc list-inside space-y-2 text-lg">
+                                <li><strong>Runway:</strong> The €800,000 is designed to fund this 5-person team and plan for ~14.5 months.</li>
+                                <li><strong>Year 1 Goal:</strong> By the end of the first 12 months, we successfully hit our target of ~€330,000 in Annual Recurring Revenue (ARR).</li>
+                                <li><strong>Year 2:</strong> The model continues this logic, showing growth to ~€900,000 ARR by the end of Month 24 as our team is fully ramped.</li>
+                            </ul>
                         </div>
                     </div>
-                    <div>
-                        <label for="conversionRate" class="font-medium text-gray-700">B2C Conversion Rate</label>
-                        <div class="flex items-center space-x-3 mt-1">
-                            <input type="range" id="conversionRate" min="1" max="5" value="2.5" step="0.1" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
-                            <span id="conversionRateValue" class="font-bold text-teal-700 w-16 text-right">2.5%</span>
+                </div>
+
+                <!-- Guiding Principles Content -->
+                <div id="principles" class="tab-content">
+                    <h2 class="text-2xl font-bold text-teal mb-4">Our GTM & Market Assumptions</h2>
+                    <p class="text-lg mb-6">This is a bottom-up forecast grounded in current traction. Revenue is the calculated output of our B2C user growth, proven PQL generation, and a phased commercialization strategy. The model assumes an €800,000 Seed investment closing in Q4 2025.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-light-gray-blue p-4 rounded-lg">
+                            <h3 class="font-bold text-teal text-lg">B2C User Growth</h3>
+                            <p>3,000 → 6,000 new users/month (Year 1)</p>
+                        </div>
+                        <div class="bg-light-gray-blue p-4 rounded-lg">
+                            <h3 class="font-bold text-teal text-lg">PQL Rate</h3>
+                            <p>20% of B2C signups from target institutions</p>
+                        </div>
+                        <div class="bg-light-gray-blue p-4 rounded-lg">
+                            <h3 class="font-bold text-teal text-lg">Avg. Academic ACV</h3>
+                            <p>€30,000 / year</p>
+                        </div>
+                        <div class="bg-light-gray-blue p-4 rounded-lg">
+                            <h3 class="font-bold text-teal text-lg">Pilot-to-Close Cycle</h3>
+                            <p>4.5 months (average)</p>
+                        </div>
+                         <div class="bg-light-gray-blue p-4 rounded-lg">
+                            <h3 class="font-bold text-teal text-lg">Initial Deal Velocity</h3>
+                            <p>2-3 new customers / quarter</p>
+                        </div>
+                        <div class="bg-light-gray-blue p-4 rounded-lg">
+                            <h3 class="font-bold text-teal text-lg">Low-Cost Customer Acquisition</h3>
+                            <p>Our B2C funnel acts as the primary source of B2B leads, creating a low-CAC model.</p>
                         </div>
                     </div>
-                    <div>
-                        <label for="b2bDeals" class="font-medium text-gray-700">B2B Deals / Rep / Qtr</label>
-                        <div class="flex items-center space-x-3 mt-1">
-                            <input type="range" id="b2bDeals" min="1" max="4" value="2" step="0.5" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
-                            <span id="b2bDealsValue" class="font-bold text-teal-700 w-16 text-right">2.0</span>
+                </div>
+
+                <!-- Use of Funds Content -->
+                <div id="funds" class="tab-content">
+                    <h2 class="text-2xl font-bold text-teal mb-4">Hiring Plan & Burn Rate</h2>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-bold text-teal mb-3 text-lg">Hiring Plan (First 12 Months)</h3>
+                            <ul class="space-y-2 list-disc list-inside text-lg">
+                                <li>Senior Software Engineers (2)</li>
+                                <li>AI Engineer (1)</li>
+                                <li>Sales Lead (1)</li>
+                                <li>Marketing Lead (1)</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-light-gray-blue border-l-4 border-medium-teal p-4 rounded-r-lg">
+                                <div class="font-bold text-teal">Total Monthly Burn</div>
+                                <div class="text-2xl font-bold text-dark-teal">€55,000</div>
+                            </div>
+                             <div class="bg-light-gray-blue border-l-4 border-seafoam text-teal p-4 rounded-r-lg">
+                                <div class="font-bold">Calculated Runway</div>
+                                <div class="text-2xl font-bold text-dark-teal">~14.5 Months</div>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <label for="b2bAcv" class="font-medium text-gray-700">Avg. B2B ACV (€)</label>
-                        <div class="flex items-center space-x-3 mt-1">
-                            <input type="range" id="b2bAcv" min="20000" max="50000" value="30000" step="1000" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer">
-                            <span id="b2bAcvValue" class="font-bold text-teal-700 w-16 text-right">€30k</span>
+                </div>
+
+                <!-- Financial Projections Content -->
+                <div id="projections" class="tab-content">
+                    <h2 class="text-2xl font-bold text-teal mb-4">3-Year Financial Projections (End of Year)</h2>
+                    
+                    <!-- Financial Table -->
+                    <div class="overflow-x-auto mb-12">
+                        <table class="w-full text-left text-lg">
+                            <thead class="bg-light-grey text-base text-dark-teal uppercase font-bold">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 rounded-l-lg">Metric</th>
+                                    <th scope="col" class="px-6 py-3 text-right">Year 1 (2026)</th>
+                                    <th scope="col" class="px-6 py-3 text-right">Year 2 (2027)</th>
+                                    <th scope="col" class="px-6 py-3 text-right rounded-r-lg">Year 3 (2028)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b border-light-grey">
+                                    <th scope="row" class="px-6 py-4 font-bold text-teal whitespace-nowrap">Annual Recurring Rev. (ARR)</th>
+                                    <td class="px-6 py-4 text-right">€330,000</td>
+                                    <td class="px-6 py-4 text-right">€900,000</td>
+                                    <td class="px-6 py-4 text-right font-bold text-dark-teal">€2,100,000</td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-grey">
+                                    <th scope="row" class="px-6 py-4 font-bold text-teal whitespace-nowrap">Total Revenue</th>
+                                    <td class="px-6 py-4 text-right">€180,000</td>
+                                    <td class="px-6 py-4 text-right">€615,000</td>
+                                    <td class="px-6 py-4 text-right">€1,500,000</td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-grey">
+                                    <th scope="row" class="px-6 py-4 font-bold text-teal whitespace-nowrap">Total Costs (Burn)</th>
+                                    <td class="px-6 py-4 text-right text-red-600">(€660,000)</td>
+                                    <td class="px-6 py-4 text-right text-red-600">(€760,000)</td>
+                                    <td class="px-6 py-4 text-right text-red-600">(€1,100,000)</td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-grey">
+                                    <th scope="row" class="px-6 py-4 font-bold text-teal whitespace-nowrap">Net Profit / (Loss)</th>
+                                    <td class="px-6 py-4 text-right text-red-600">(€480,0F0)</td>
+                                    <td class="px-6 py-4 text-right text-red-600">(€145,000)</td>
+                                    <td class="px-6 py-4 text-right font-bold text-seafoam">€400,000</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <th scope="row" class="px-6 py-4 font-bold text-teal whitespace-nowrap">Cumulative Cash</th>
+                                    <td class="px-6 py-4 text-right">€320,000</td>
+                                    <td class="px-6 py-4 text-right">€175,000</td>
+                                    <td class="px-6 py-4 text-right font-bold text-seafoam">€575,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
+                        <div>
+                             <h3 class="text-xl font-bold text-teal mb-2 text-center">Revenue Growth</h3>
+                             <canvas id="revenueChart"></canvas>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-teal mb-2 text-center">Cash Flow & Cumulative Cash</h3>
+                            <canvas id="cashflowChart"></canvas>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-teal mb-2 text-center">Capital Efficiency</h3>
+                            <canvas id="efficiencyChart"></canvas>
+                             <p class="text-base text-center mt-1">Ratio: Total Burn / New ARR. <strong class="text-seafoam">Lower is better.</strong></p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-teal mb-2 text-center">Equity Ratio</h3>
+                            <canvas id="equityChart"></canvas>
+                            <p class="text-base text-center mt-1">Ratio: Total Equity / Total Assets. Accounts for €40k loan.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        
-        <div class="grid lg:grid-cols-2 gap-12">
-            <div id="revenue" class="bg-white p-8 rounded-lg border border-stone-200">
-                 <h2 class="text-2xl font-bold text-gray-800 mb-1">Revenue Growth</h2>
-                 <p class="text-gray-600 mb-6">Projected Monthly Recurring Revenue (MRR) over 24 months, broken down by our B2C and B2B streams.</p>
-                <div class="chart-container">
-                    <canvas id="revenueChart"></canvas>
-                </div>
-            </div>
 
-            <div id="cashflow" class="bg-white p-8 rounded-lg border border-stone-200">
-                <h2 class="text-2xl font-bold text-gray-800 mb-1">Cash Flow & Runway</h2>
-                <p class="text-gray-600 mb-6">Our projected cash balance over the next 24 months, illustrating our burn rate and runway from the €1.5M seed investment.</p>
-                <div class="chart-container">
-                    <canvas id="cashflowChart"></canvas>
+                <!-- Key Takeaways Content -->
+                <div id="takeaways" class="tab-content">
+                     <h2 class="text-2xl font-bold text-teal mb-4">Our Investment Thesis</h2>
+                     <p class="text-xl font-bold text-dark-teal mb-6">Our Value Proposition: We leverage a high-engagement B2C product to create a highly qualified, low-cost PQL funnel for our high-value B2B enterprise platform.</p>
+                     <ul class="space-y-4 text-lg">
+                        <li class="flex items-start">
+                            <span class="text-seafoam mr-3 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </span>
+                            <span><strong class="text-teal">Phase 1 Goal Achieved:</strong> The model shows we will comfortably exceed our €25k MRR target within 12 months.</span>
+                        </li>
+                         <li class="flex items-start">
+                            <span class="text-seafoam mr-3 mt-1">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </span>
+                            <span><strong class="text-teal">Healthy Runway:</strong> The €800k seed provides ~14.5 months of runway, allowing us to hit Series A milestones.</span>
+                        </li>
+                         <li class="flex items-start">
+                            <span class_content="text-seafoam mr-3 mt-1">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </span>
+                            <span><strong class="text-teal">Path to Profitability:</strong> On track to become cash-flow positive in Year 3.</span>
+                        </li>
+                         <li class="flex items-start">
+                            <span class="text-seafoam mr-3 mt-1">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </span>
+                            <span><strong class="text-teal">Capital Efficiency:</strong> This plan demonstrates a highly efficient use of capital to build a sustainable business.</span>
+                        </li>
+                     </ul>
                 </div>
-            </div>
+            </main>
         </div>
+    </div>
 
-        <div class="grid lg:grid-cols-2 gap-12 mt-12">
-            <div id="expenses" class="bg-white p-8 rounded-lg border border-stone-200">
-                 <h2 class="text-2xl font-bold text-gray-800 mb-1">Expense Breakdown</h2>
-                 <p class="text-gray-600 mb-6">A breakdown of our projected monthly operating expenses at the end of Year 2, mirroring our strategic "Use of Funds".</p>
-                <div class="chart-container">
-                    <canvas id="expenseChart"></canvas>
-                </div>
-            </div>
+    <script>
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
 
-            <div id="headcount" class="bg-white p-8 rounded-lg border border-stone-200">
-                <h2 class="text-2xl font-bold text-gray-800 mb-1">Headcount Plan</h2>
-                <p class="text-gray-600 mb-6">Our strategic hiring plan over 24 months, scaling the team to execute on our product and sales roadmap.</p>
-                <div class="chart-container">
-                    <canvas id="headcountChart"></canvas>
-                </div>
-            </div>
-        </div>
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                tabs.forEach(item => item.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                const targetTab = e.target.getAttribute('data-tab');
+                e.target.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
 
-    </main>
-    
-    <footer class="border-t border-stone-200 mt-16">
-        <div class="container mx-auto px-6 py-6 text-center text-gray-500 text-sm">
-            <p>&copy; 2025 Aveksana. This is a forward-looking financial model for discussion purposes only.</p>
-        </div>
-    </footer>
+        // Chart.js functionality
+        // Helper to format currency
+        const euroFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 });
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    let revenueChart, cashflowChart, expenseChart, headcountChart;
+        const chartData = {
+            labels: ['Year 1 (2026)', 'Year 2 (2027)', 'Year 3 (2028)'],
+            arr: [330000, 900000, 2100000],
+            totalRevenue: [180000, 615000, 1500000],
+            totalCosts: [660000, 760000, 1100000],
+            netProfit: [-480000, -145000, 400000],
+            cumulativeCash: [320000, 175000, 575000],
+        };
 
-    const assumptions = {
-        investment: 1500000,
-        startUsers: 22000,
-        userGrowthRate: 0.15,
-        conversionRate: 0.025,
-        b2cPrice: 19.90,
-        b2bAcv: 30000,
-        salesCycleMonths: 6,
-        dealsPerRepPerQuarter: 2,
-        founderSalary: 70000,
-        b2bRepSalary: 60000,
-        engineerSalary: 65000,
-        pmSalary: 75000,
-        supportSalary: 45000,
-        payrollTax: 0.25,
-        commissionRate: 0.10,
-        marketingSpendRate: 0.15,
-        infraCostPer1kUsers: 50,
-        softwarePerEmployee: 200,
-        gaMonthly: 3000,
-        hiringPlan: {
-            b2bRep: [2, 6, 10, 14],
-            engineer: [3, 9, 15],
-            pm: [5],
-            support: [8]
-        }
-    };
-
-    const formatCurrency = (value) => {
-        if (Math.abs(value) >= 1000000) {
-            return `€${(value / 1000000).toFixed(1)}M`;
-        }
-        if (Math.abs(value) >= 1000) {
-            return `€${(value / 1000).toFixed(0)}k`;
-        }
-        return `€${value.toFixed(0)}`;
-    };
-
-    function calculateModel() {
-        let users = assumptions.startUsers;
-        const results = {
-            b2cMrr: [], b2bMrr: [], totalMrr: [], cashBalance: [],
-            gtmCosts: [], productCosts: [], adminCosts: [],
-            headcount: { founders: [], sales: [], engineering: [], product: [], support: [] }
+        const chartOptions = {
+             responsive: true,
+             maintainAspectRatio: true,
+             scales: { y: { beginAtZero: true, ticks: { callback: (value) => euroFormatter.format(value) } } },
+             plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${euroFormatter.format(context.raw)}` } } }
         };
         
-        let currentCash = assumptions.investment;
-        let b2bCustomers = 4;
-        const salesReps = Array(25).fill(0);
-        const newDealsPipeline = Array(25).fill(0);
+        Chart.defaults.font.family = "'DM Sans', sans-serif";
+        Chart.defaults.font.weight = 'bold';
 
-        for (let month = 1; month <= 24; month++) {
-            if (month > 1) users *= (1 + assumptions.userGrowthRate);
-            
-            const payingUsers = users * assumptions.conversionRate;
-            const currentB2cMrr = payingUsers * assumptions.b2cPrice;
-            results.b2cMrr.push(currentB2cMrr);
-
-            let newB2bRepCount = assumptions.hiringPlan.b2bRep.filter(m => m === month).length;
-            for(let i=0; i<salesReps.length; i++) {
-                if(salesReps[i] === 0 && newB2bRepCount > 0) {
-                    salesReps[i] = 1; newB2bRepCount--;
-                }
-            }
-            const activeSalesReps = salesReps.reduce((a, b) => a + b, 0);
-
-            if(activeSalesReps > 0 && (month - 1) % 3 === 0) {
-                const dealsThisQuarter = activeSalesReps * assumptions.dealsPerRepPerQuarter;
-                const deliveryMonth = month + assumptions.salesCycleMonths;
-                if(deliveryMonth <= 24) newDealsPipeline[deliveryMonth] += dealsThisQuarter;
-            }
-            
-            b2bCustomers += newDealsPipeline[month] || 0;
-            const currentB2bMrr = (b2bCustomers * assumptions.b2bAcv) / 12;
-            results.b2bMrr.push(currentB2bMrr);
-            results.totalMrr.push(currentB2cMrr + currentB2bMrr);
-
-            const currentHeadcount = {
-                founders: 4,
-                sales: assumptions.hiringPlan.b2bRep.filter(m => m <= month).length,
-                engineering: 1 + assumptions.hiringPlan.engineer.filter(m => m <= month).length,
-                product: assumptions.hiringPlan.pm.filter(m => m <= month).length,
-                support: assumptions.hiringPlan.support.filter(m => m <= month).length
-            };
-            Object.keys(currentHeadcount).forEach(role => results.headcount[role].push(currentHeadcount[role]));
-            
-            const salaries = {
-                founders: (currentHeadcount.founders * assumptions.founderSalary) / 12,
-                sales: (currentHeadcount.sales * assumptions.b2bRepSalary) / 12,
-                engineering: (currentHeadcount.engineering * assumptions.engineerSalary) / 12,
-                product: (currentHeadcount.product * assumptions.pmSalary) / 12,
-                support: (currentHeadcount.support * assumptions.supportSalary) / 12
-            };
-            const totalEmployees = Object.values(currentHeadcount).reduce((a, b) => a + b, 0);
-
-            const gtm = (salaries.sales * (1 + assumptions.payrollTax)) + 
-                        (currentB2cMrr * assumptions.marketingSpendRate) + 
-                        ((newDealsPipeline[month] || 0) * assumptions.b2bAcv * assumptions.commissionRate);
-            
-            const product = (salaries.engineering * (1 + assumptions.payrollTax)) + 
-                            (salaries.product * (1 + assumptions.payrollTax)) +
-                            ((users / 1000) * assumptions.infraCostPer1kUsers);
-
-            const admin = (salaries.founders * (1 + assumptions.payrollTax)) +
-                          (salaries.support * (1 + assumptions.payrollTax)) +
-                          (totalEmployees * assumptions.softwarePerEmployee) +
-                          assumptions.gaMonthly;
-            
-            results.gtmCosts.push(gtm);
-            results.productCosts.push(product);
-            results.adminCosts.push(admin);
-            
-            const expense = gtm + product + admin;
-            currentCash += (currentB2cMrr + currentB2bMrr) - expense;
-            results.cashBalance.push(currentCash > 0 ? currentCash : 0);
+        // 1. Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart');
+        if (revenueCtx) {
+            new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [
+                        { label: 'Total Revenue', data: chartData.totalRevenue, backgroundColor: '#01949A' },
+                        { label: 'ARR', data: chartData.arr, backgroundColor: '#016367' }
+                    ]
+                },
+                options: chartOptions
+            });
         }
-        return results;
-    }
-
-    function updateDashboard() {
-        const model = calculateModel();
         
-        revenueChart.data.datasets[0].data = model.b2cMrr;
-        revenueChart.data.datasets[1].data = model.b2bMrr;
-        revenueChart.update();
-
-        cashflowChart.data.datasets[0].data = model.cashBalance;
-        cashflowChart.update();
-        
-        const lastMonthIndex = 23;
-        const totalExpensesLastMonth = model.gtmCosts[lastMonthIndex] + model.productCosts[lastMonthIndex] + model.adminCosts[lastMonthIndex];
-        expenseChart.data.datasets[0].data = [
-            (model.gtmCosts[lastMonthIndex] / totalExpensesLastMonth) * 100,
-            (model.productCosts[lastMonthIndex] / totalExpensesLastMonth) * 100,
-            (model.adminCosts[lastMonthIndex] / totalExpensesLastMonth) * 100,
-        ];
-        expenseChart.update();
-
-        headcountChart.data.datasets[0].data = model.headcount.founders;
-        headcountChart.data.datasets[1].data = model.headcount.sales;
-        headcountChart.data.datasets[2].data = model.headcount.engineering;
-        headcountChart.data.datasets[3].data = model.headcount.product;
-        headcountChart.data.datasets[4].data = model.headcount.support;
-        headcountChart.update();
-        
-        document.getElementById('kpi-arr').textContent = formatCurrency(model.totalMrr[lastMonthIndex] * 12);
-        
-        let runwayMonths = '24+';
-        for(let i = 0; i < model.cashBalance.length; i++) {
-            if (model.cashBalance[i] <= 0) {
-                runwayMonths = i;
-                break;
-            }
+        // 2. Cash Flow Chart
+        const cashflowCtx = document.getElementById('cashflowChart');
+        if (cashflowCtx) {
+             new Chart(cashflowCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [
+                         {
+                            label: 'Net Profit/(Loss)',
+                            data: chartData.netProfit,
+                            backgroundColor: (context) => context.raw >= 0 ? '#49C3A3' : '#ef4444',
+                         },
+                         {
+                            label: 'Cumulative Cash',
+                            data: chartData.cumulativeCash,
+                            type: 'line',
+                            borderColor: '#016367',
+                            tension: 0.1,
+                            fill: false
+                         }
+                    ]
+                },
+                options: { ...chartOptions, scales: { y: { beginAtZero: false, ticks: { callback: (value) => euroFormatter.format(value) } } } }
+            });
         }
-        document.getElementById('kpi-runway').textContent = `${runwayMonths} mos`;
-    }
-
-    function createCharts() {
-        const labels = Array.from({ length: 24 }, (_, i) => `M${i + 1}`);
-        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-        revenueChart = new Chart(revenueCtx, {
-            type: 'bar',
-            data: { labels, datasets: [
-                { label: 'B2C MRR', data: [], backgroundColor: '#14b8a6', stack: 'Stack 0' },
-                { label: 'B2B MRR', data: [], backgroundColor: '#0f766e', stack: 'Stack 0' }]
-            },
-            options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: value => formatCurrency(value) } } }, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: c => `${c.dataset.label}: ${formatCurrency(c.raw)}` } } } }
-        });
-
-        const cashflowCtx = document.getElementById('cashflowChart').getContext('2d');
-        cashflowChart = new Chart(cashflowCtx, {
-            type: 'line',
-            data: { labels, datasets: [{ label: 'Cash Balance', data: [], borderColor: '#0d9488', backgroundColor: 'rgba(13, 148, 136, 0.1)', fill: true, tension: 0.1 }]
-            },
-            options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: value => formatCurrency(value) } } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `Cash: ${formatCurrency(c.raw)}` } } } }
-        });
-
-        const expenseCtx = document.getElementById('expenseChart').getContext('2d');
-        expenseChart = new Chart(expenseCtx, {
-            type: 'doughnut',
-            data: { 
-                labels: ['Go-to-Market', 'Product & Engineering', 'General & Admin'],
-                datasets: [{ data: [], backgroundColor: ['#0f766e', '#14b8a6', '#99f6e4'], borderColor: '#FDFBF8', borderWidth: 4 }]
-            },
-            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.label}: ${c.raw.toFixed(1)}%` } } } }
-        });
-
-        const headcountCtx = document.getElementById('headcountChart').getContext('2d');
-        headcountChart = new Chart(headcountCtx, {
-            type: 'bar',
-            data: { labels, datasets: [
-                { label: 'Founders', data: [], backgroundColor: '#042f2e', stack: 'Stack 0'},
-                { label: 'Sales', data: [], backgroundColor: '#0f766e', stack: 'Stack 0'},
-                { label: 'Engineering', data: [], backgroundColor: '#14b8a6', stack: 'Stack 0'},
-                { label: 'Product', data: [], backgroundColor: '#5eead4', stack: 'Stack 0'},
-                { label: 'Support', data: [], backgroundColor: '#99f6e4', stack: 'Stack 0'}
-            ]},
-            options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, ticks: { stepSize: 2 } } }, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => `${c.dataset.label}: ${c.raw}` } } } }
-        });
-    }
-    
-    function setupEventListeners() {
-        const userGrowthSlider = document.getElementById('userGrowth');
-        const conversionRateSlider = document.getElementById('conversionRate');
-        const b2bDealsSlider = document.getElementById('b2bDeals');
-        const b2bAcvSlider = document.getElementById('b2bAcv');
-
-        userGrowthSlider.addEventListener('input', (e) => {
-            const value = parseFloat(e.target.value);
-            assumptions.userGrowthRate = value / 100;
-            document.getElementById('userGrowthValue').textContent = `${value}%`;
-            updateDashboard();
-        });
-
-        conversionRateSlider.addEventListener('input', (e) => {
-            const value = parseFloat(e.target.value);
-            assumptions.conversionRate = value / 100;
-            document.getElementById('conversionRateValue').textContent = `${value.toFixed(1)}%`;
-            updateDashboard();
-        });
         
-        b2bDealsSlider.addEventListener('input', (e) => {
-            const value = parseFloat(e.target.value);
-            assumptions.dealsPerRepPerQuarter = value;
-            document.getElementById('b2bDealsValue').textContent = `${value.toFixed(1)}`;
-            updateDashboard();
-        });
+        // 3. Capital Efficiency Chart
+        const efficiencyCtx = document.getElementById('efficiencyChart');
+        if (efficiencyCtx) {
+            const newArr = [chartData.arr[0], chartData.arr[1] - chartData.arr[0], chartData.arr[2] - chartData.arr[1]];
+            const efficiencyData = [
+                chartData.totalCosts[0] / newArr[0],
+                chartData.totalCosts[1] / newArr[1],
+                chartData.totalCosts[2] / newArr[2]
+            ];
+            new Chart(efficiencyCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Efficiency Ratio',
+                        data: efficiencyData,
+                        backgroundColor: '#49C3A3'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${context.raw.toFixed(2)}` } } } }
+            });
+        }
 
-        b2bAcvSlider.addEventListener('input', (e) => {
-            const value = parseInt(e.target.value);
-            assumptions.b2bAcv = value;
-            document.getElementById('b2bAcvValue').textContent = `${formatCurrency(value)}`;
-            updateDashboard();
-        });
-    }
+        // 4. Equity Ratio Chart
+        const equityCtx = document.getElementById('equityChart');
+        if (equityCtx) {
+             const loanAmount = 40000;
+             const equityRatioData = chartData.cumulativeCash.map(cash => {
+                if (cash <= 0) return 0; // Avoid division by zero or negative assets
+                const equity = cash - loanAmount;
+                return (equity / cash) * 100;
+             });
 
-    createCharts();
-    setupEventListeners();
-    updateDashboard();
-});
-</script>
+             new Chart(equityCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Equity Ratio (%)',
+                        data: equityRatioData,
+                        backgroundColor: '#01949A'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 110, ticks: { callback: (value) => `${value}%` } } }, plugins: { legend: { display: false } } }
+            });
+        }
+    </script>
+
 </body>
 </html>
