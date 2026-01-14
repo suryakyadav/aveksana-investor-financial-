@@ -8,15 +8,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=MuseoModerno:wght@700&display=swap" rel="stylesheet">
+    <!-- UPDATED FONTS: Plus Jakarta Sans (Authority) & Inter (Readability) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Inter', sans-serif; /* The Readability Font */
             background-color: #FAFAFA;
             color: #7A7A7A;
         }
-        .font-museo {
-            font-family: 'MuseoModerno', sans-serif;
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif; /* The Authority Font */
         }
         .tab-content {
             display: none;
@@ -46,11 +47,12 @@
         <div class="w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
             <!-- Header -->
             <header class="bg-dark-teal text-white p-6 md:p-8">
-                <h1 class="font-museo text-5xl font-bold">Aveksana</h1>
-                <p class="text-slate-300 mt-1 text-lg">Interactive 3-Year Financial Projections</p>
+                <!-- H1: Authority Font (Extrabold) -->
+                <h1 class="font-jakarta text-5xl font-extrabold">Aveksana</h1>
+                <p class="text-slate-300 mt-1 text-lg font-medium">Interactive 3-Year Financial Projections</p>
             </header>
 
-            <!-- Tab Navigation -->
+            <!-- Tab Navigation (Inter - Medium/Bold for readability) -->
             <nav class="border-b border-light-grey">
                 <ul class="flex flex-wrap -mb-px text-base font-bold text-gray-400">
                     <li class="mr-2">
@@ -75,12 +77,12 @@
             <main class="p-6 md:p-8">
                 <!-- The Story Content -->
                 <div id="story" class="tab-content active">
-                    <h2 class="text-2xl font-bold text-teal mb-4">Our Bottom-Up Plan</h2>
+                    <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">Our Bottom-Up Plan</h2>
                     <p class="text-lg mb-6">Our financial plan is a bottom-up forecast, built directly from our specific hiring plan and go-to-market strategy across our three revenue streams.</p>
                     
                     <div class="space-y-6">
                         <div>
-                            <h3 class="text-xl font-bold text-dark-teal mb-2">1. The Plan (Money Out / Expenses)</h3>
+                            <h3 class="font-jakarta text-xl font-bold text-dark-teal mb-2">1. The Plan (Money Out / Expenses)</h3>
                             <ul class="list-disc list-inside space-y-2 text-lg">
                                 <li><strong>New Funding Strategy:</strong> We start with <strong>€200k</strong> (consisting of a €100k bridge round that unlocks a €100k public grant).</li>
                                 <li><strong>Seed Round:</strong> The main Seed round is <strong>€1.5M</strong> (closing <strong>Q2 2026</strong>) to fuel aggressive engineering and sales growth.</li>
@@ -91,7 +93,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl font-bold text-dark-teal mb-2">2. The Result (Money In / Revenue)</h3>
+                            <h3 class="font-jakarta text-xl font-bold text-dark-teal mb-2">2. The Result (Money In / Revenue)</h3>
                             <p class="text-lg mb-4">Our growth is driven by three distinct revenue streams:</p>
                             <ul class="list-disc list-inside space-y-2 text-lg ml-4">
                                 <li><strong>1. B2C Thesis Support (The Base):</strong> We are already live and generating <strong>~€300 MRR</strong>. This stream grows linearly as we scale from our current base to add 3,000–6,000 new users/month.</li>
@@ -101,7 +103,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl font-bold text-dark-teal mb-2">3. The Grand Finale (The KPIs)</h3>
+                            <h3 class="font-jakarta text-xl font-bold text-dark-teal mb-2">3. The Grand Finale (The KPIs)</h3>
                             <p class="text-lg mb-4">Here is how the numbers come together. You’ll see an initial ramp in expenses as we assemble the team. This is deliberate. It builds the capacity that allows our B2B engines (Universities + Artha) to kick in around Month 5 and drive compounding growth.</p>
                             <ul class="list-disc list-inside space-y-2 text-lg">
                                 <li><strong>Runway:</strong> With the robust <strong>€1.7M total funding</strong> (Bridge + Seed) and a phased hiring plan, we have secured a runway of <strong>~24 months</strong>.</li>
@@ -114,15 +116,15 @@
 
                 <!-- Guiding Principles Content -->
                 <div id="principles" class="tab-content">
-                    <h2 class="text-2xl font-bold text-teal mb-4">Our GTM & Market Assumptions</h2>
+                    <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">Our GTM & Market Assumptions</h2>
                     <p class="text-lg mb-6">This is a bottom-up forecast grounded in current traction (~€300 MRR). Revenue is the output of our B2C growth and two B2B engines: University Thesis Support and Artha (Grant Writing).</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-bold text-teal text-lg">Proprietary Tech Advantage</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">Proprietary Tech Advantage</h3>
                             <p>We are <strong>not a wrapper</strong>. Our proprietary model delivers high efficiency. With <strong>€195k in Cloud Credits</strong>, our infrastructure costs are effectively zero for Y1-Y3.</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-bold text-teal text-lg">The "Lifecycle" Retention Model</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">The "Lifecycle" Retention Model</h3>
                             <p class="text-sm mt-1">We don't just churn users; we graduate them:</p>
                             <ul class="text-sm list-disc list-inside">
                                 <li><strong>Student Portal:</strong> Bachelors → Masters → PhDs</li>
@@ -132,12 +134,12 @@
                             </ul>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-bold text-teal text-lg">Unit Economics</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">Unit Economics</h3>
                             <p class="font-bold text-medium-teal mb-1">CAC Payback < 6 Months</p>
                             <p>Our organic B2C funnel acts as a "paid-for" lead generation engine for B2B, keeping overall customer acquisition costs exceptionally low.</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-bold text-teal text-lg">B2B Sales Physics (The Math)</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">B2B Sales Physics (The Math)</h3>
                             <ul class="text-sm mt-1 list-disc list-inside">
                                 <li><strong>Target:</strong> 10 Sales/Year (Year 1)</li>
                                 <li><strong>Required Pipeline:</strong> ~125 Qualified Leads</li>
@@ -145,7 +147,7 @@
                             </ul>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-bold text-teal text-lg">Artha Pricing Tiers (Hypothesis)</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">Artha Pricing Tiers (Hypothesis)</h3>
                             <ul class="text-sm mt-1 list-disc list-inside">
                                 <li><strong>Startups (1-3 users):</strong> €2,500 / year</li>
                                 <li><strong>SMEs (up to 5 users):</strong> €5,000 / year</li>
@@ -153,15 +155,15 @@
                             </ul>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-bold text-teal text-lg">Avg. Academic ACV</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">Avg. Academic ACV</h3>
                             <p>€30,000 / year (Thesis System)</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-bold text-teal text-lg">Pilot-to-Close Cycle</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">Pilot-to-Close Cycle</h3>
                             <p>4.5 months (average)</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-bold text-teal text-lg">Funding Strategy</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">Funding Strategy</h3>
                             <p>€200k (Q4 '25) + <strong>€1.5M Seed</strong> (Q2 '26). Total Capital: €1.7M.</p>
                         </div>
                     </div>
@@ -169,10 +171,10 @@
 
                 <!-- Use of Funds Content -->
                 <div id="funds" class="tab-content">
-                    <h2 class="text-2xl font-bold text-teal mb-4">Hiring Plan & Burn Rate</h2>
+                    <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">Hiring Plan & Burn Rate</h2>
                      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <h3 class="font-bold text-teal mb-3 text-lg">Hiring Plan (7 New Roles)</h3>
+                            <h3 class="font-jakarta font-bold text-teal mb-3 text-lg">Hiring Plan (7 New Roles)</h3>
                             <p class="mb-2 italic text-sm">Phased rollout across Q2 & Q3:</p>
                             <ul class="space-y-2 list-disc list-inside text-lg">
                                 <li>Senior Software Engineers (2)</li>
@@ -184,12 +186,12 @@
                         </div>
                         <div class="space-y-4">
                             <div class="bg-light-gray-blue border-l-4 border-medium-teal p-4 rounded-r-lg">
-                                <div class="font-bold text-teal">Stabilized Monthly OpEx</div>
+                                <div class="font-jakarta font-bold text-teal">Stabilized Monthly OpEx</div>
                                 <div class="text-2xl font-bold text-dark-teal">~€70,000</div>
                                 <div class="text-sm italic text-gray-500">(Salaries & Operations)</div>
                             </div>
                              <div class="bg-light-gray-blue border-l-4 border-seafoam text-teal p-4 rounded-r-lg">
-                                <div class="font-bold">Calculated Runway</div>
+                                <div class="font-jakarta font-bold">Calculated Runway</div>
                                 <div class="text-2xl font-bold text-dark-teal">~24 Months</div>
                             </div>
                         </div>
@@ -198,7 +200,7 @@
 
                 <!-- Financial Projections Content -->
                 <div id="projections" class="tab-content">
-                    <h2 class="text-2xl font-bold text-teal mb-4">3-Year Financial Projections (End of Year)</h2>
+                    <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">3-Year Financial Projections (End of Year)</h2>
                     
                     <!-- Financial Table -->
                     <div class="overflow-x-auto mb-12">
@@ -220,20 +222,20 @@
                     <!-- Charts -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
                         <div>
-                             <h3 class="text-xl font-bold text-teal mb-2 text-center">Revenue Growth</h3>
+                             <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Revenue Growth</h3>
                              <canvas id="revenueChart"></canvas>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-teal mb-2 text-center">Cash Flow & Cumulative Cash</h3>
+                            <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Cash Flow & Cumulative Cash</h3>
                             <canvas id="cashflowChart"></canvas>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-teal mb-2 text-center">Capital Efficiency</h3>
+                            <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Capital Efficiency</h3>
                             <canvas id="efficiencyChart"></canvas>
                              <p class="text-base text-center mt-1">Ratio: Total Burn / New ARR. <strong class="text-seafoam">Lower is better.</strong></p>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-teal mb-2 text-center">Equity Ratio</h3>
+                            <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Equity Ratio</h3>
                             <canvas id="equityChart"></canvas>
                             <p class="text-base text-center mt-1">Ratio: Total Equity / Total Assets. Accounts for €40k loan.</p>
                         </div>
@@ -242,7 +244,7 @@
 
                 <!-- Key Takeaways Content -->
                 <div id="takeaways" class="tab-content">
-                     <h2 class="text-2xl font-bold text-teal mb-4">Our Investment Thesis</h2>
+                     <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">Our Investment Thesis</h2>
                      <p class="text-xl font-bold text-dark-teal mb-6">Our Value Proposition: We leverage a high-engagement B2C product to create a highly qualified, low-cost PQL funnel for our high-value B2B enterprise platforms (Thesis Support & Artha).</p>
                      
                      <!-- Milestones List -->
@@ -269,13 +271,13 @@
                      </ul>
 
                      <!-- Risk Matrix -->
-                     <h3 class="text-xl font-bold text-teal mb-3">Risk Assessment & Mitigation</h3>
+                     <h3 class="font-jakarta text-xl font-bold text-teal mb-3">Risk Assessment & Mitigation</h3>
                      <div class="overflow-hidden border border-gray-200 rounded-lg">
                         <table class="min-w-full bg-white text-base">
                             <thead class="bg-light-gray-blue text-dark-teal">
                                 <tr>
-                                    <th class="py-3 px-4 text-left">Risk Area</th>
-                                    <th class="py-3 px-4 text-left">Mitigation Strategy</th>
+                                    <th class="py-3 px-4 text-left font-jakarta">Risk Area</th>
+                                    <th class="py-3 px-4 text-left font-jakarta">Mitigation Strategy</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -418,6 +420,9 @@
         renderTable();
         // --- REFACTOR END ---
 
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.font.weight = 'bold';
+
         const chartOptions = {
              responsive: true,
              maintainAspectRatio: true,
@@ -425,9 +430,6 @@
              plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${euroFormatter.format(context.raw)}` } } }
         };
         
-        Chart.defaults.font.family = "'DM Sans', sans-serif";
-        Chart.defaults.font.weight = 'bold';
-
         // 1. Revenue Chart
         const revenueCtx = document.getElementById('revenueChart');
         if (revenueCtx) {
