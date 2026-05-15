@@ -8,27 +8,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- UPDATED FONTS: Plus Jakarta Sans (Authority) & Inter (Readability) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif; /* The Readability Font */
+            font-family: 'Inter', sans-serif;
             background-color: #FAFAFA;
             color: #7A7A7A;
         }
-        .font-jakarta {
-            font-family: 'Plus Jakarta Sans', sans-serif; /* The Authority Font */
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .tab.active {
-            border-bottom-color: #01949A;
-            color: #01949A;
-        }
+        .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab.active { border-bottom-color: #01949A; color: #01949A; }
         .text-dark-teal { color: #003B3E; }
         .bg-dark-teal { background-color: #003B3E; }
         .text-teal { color: #016367; }
@@ -45,83 +35,70 @@
 
     <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
         <div class="w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-            <!-- Header -->
             <header class="bg-dark-teal text-white p-6 md:p-8">
-                <!-- H1: Authority Font (Extrabold) -->
                 <h1 class="font-jakarta text-5xl font-extrabold">Aveksana</h1>
                 <p class="text-slate-300 mt-1 text-lg font-medium">Interactive 3-Year Financial Projections</p>
             </header>
 
-            <!-- Tab Navigation (Inter - Medium/Bold for readability) -->
             <nav class="border-b border-light-grey">
                 <ul class="flex flex-wrap -mb-px text-base font-bold text-gray-400">
-                    <li class="mr-2">
-                        <a href="#" class="tab active inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="story">The Story</a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="principles">Guiding Principles</a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="funds">Use of Funds</a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="projections">Projections</a>
-                    </li>
-                    <li>
-                        <a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="takeaways">Key Takeaways</a>
-                    </li>
+                    <li class="mr-2"><a href="#" class="tab active inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="story">The Story</a></li>
+                    <li class="mr-2"><a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="principles">Guiding Principles</a></li>
+                    <li class="mr-2"><a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="funds">Use of Funds</a></li>
+                    <li class="mr-2"><a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="projections">Projections</a></li>
+                    <li><a href="#" class="tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-teal" data-tab="takeaways">Key Takeaways</a></li>
                 </ul>
             </nav>
 
-            <!-- Content Area -->
             <main class="p-6 md:p-8">
-                <!-- The Story Content -->
+                <!-- The Story -->
                 <div id="story" class="tab-content active">
                     <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">Our Bottom-Up Plan</h2>
-                    <p class="text-lg mb-6">Our financial plan is a bottom-up forecast, built directly from our specific hiring plan and go-to-market strategy across our three revenue streams.</p>
+                    <p class="text-lg mb-6">Our financial plan is a bottom-up forecast, built directly from our specific hiring plan and go-to-market strategy across our three revenue streams, anchored in dual markets: <strong>South Asia (India, Nepal, Pakistan)</strong> for volume and <strong>Europe (Nordic, EU)</strong> for ACV and defensibility.</p>
                     
                     <div class="space-y-6">
                         <div>
                             <h3 class="font-jakarta text-xl font-bold text-dark-teal mb-2">1. The Plan (Money Out / Expenses)</h3>
                             <ul class="list-disc list-inside space-y-2 text-lg">
-                                <li><strong>Funding Strategy:</strong> We start with <strong>€200k</strong> (consisting of a €100k bridge round that unlocks a €100k public grant).</li>
-                                <li><strong>Seed Round:</strong> The main Seed round is <strong>€1.5M</strong> (closing <strong>Q2 2026</strong>) to fuel aggressive engineering and sales growth.</li>
-                                <li><strong>Current Team (The Base):</strong> We are currently a team of 5, including 3 founders (covering AI, Product/Marketing, Sales) and 2 engineers (Fullstack & Junior). Our "lights-on" burn now is <strong>€9,000/mo</strong>.</li>
-                                <li><strong>Lean Start (Q1):</strong> We maintain this lean "lights-on" burn (~€9k/mo) through Q1 to maximize the bridge runway.</li>
-                                <li><strong>Phased Scaling:</strong> We will hire <strong>7 new key team members</strong> spread across Q2 and Q3 to ramp up responsibly. Once fully hired, our total burn rate stabilizes at <strong>~€70,000</strong> per month.</li>
+                                <li><strong>Funding Strategy:</strong> We start with <strong>€200k</strong> (€100k bridge + €100k public grant), with a <strong>€100k Business Finland Sprint grant</strong> applied for to land in H2 2026 (~€70k advance within 30 days of approval + €30k tail on completion).</li>
+                                <li><strong>Seed Round (Multi-Phase):</strong> The <strong>€1.5M Seed round is raised in two phases</strong> — <strong>€500k tranche 1 closing Q2 2026</strong> to begin partial hiring, and <strong>€1M tranche 2 closing Q4 2026</strong> once Sprint pilot evidence has landed. This matches realistic European VC timing (summer slowdown) and discipline expectations.</li>
+                                <li><strong>Series A:</strong> A <strong>€3M Series A</strong> is targeted for <strong>late 2027</strong>, conditional on hitting €500k+ ARR on path to €1M, 15+ university logos, and a proven lifecycle upsell engine.</li>
+                                <li><strong>Current Team (The Base):</strong> We are currently a team of 5 — 3 founders (CEO, COO, AI Lead) and 2 engineers. "Lights-on" burn is <strong>€9,000/mo</strong>.</li>
+                                <li><strong>Phased Hiring:</strong> Q1 2026 lean (€9k/mo). Q2 2026 first 3 hires (engineers + AI engineer) after Seed T1. Q4 2026 final 4 hires (sales, marketing ops, UX) after Seed T2. Stabilised burn from Q1 2027: <strong>~€70,000/mo</strong>.</li>
                             </ul>
                         </div>
 
                         <div>
                             <h3 class="font-jakarta text-xl font-bold text-dark-teal mb-2">2. The Result (Money In / Revenue)</h3>
-                            <p class="text-lg mb-4">Our growth is driven by three distinct revenue streams:</p>
+                            <p class="text-lg mb-4">Our growth is driven by three distinct revenue streams across two geographic markets:</p>
                             <ul class="list-disc list-inside space-y-2 text-lg ml-4">
-                                <li><strong>1. B2C Thesis Support (The Base):</strong> We are already live and generating <strong>~€300 MRR</strong>. This stream grows linearly as we scale from our current base to add 3,000–6,000 new users/month.</li>
-                                <li><strong>2. B2B Universities (The Scale):</strong> Selling our Thesis Support System directly to institutions. We assume a ~4.5 month sales cycle with an average contract value (ACV) of €30k. closing <strong>10 deals</strong> in Year 1 drives the majority of our €330k ARR target.</li>
-                                <li><strong>3. B2B Artha (The Upsell):</strong> A specialized grant-writing module. <strong>Professors requested and paid us to build and pilot this tool.</strong> It now acts as a high-value upsell to our university contracts, with pricing tiers from €2.5k to €20k.</li>
+                                <li><strong>1. B2C Thesis Support (The Base):</strong> Live with <strong>~€300 MRR</strong> and 25,000+ active users. Linear growth via 3,000–6,000 new users/month.</li>
+                                <li><strong>2. B2B Universities (The Scale):</strong> Selling our Thesis Support System into universities across South Asia and the EU. <strong>~4.5-month sales cycle</strong>, average ACV €30k. Lead targets: Pune University (India), Kathmandu University (Nepal), NUST University (Pakistan), anchored by an active R&D LOI with Tampere University in the EU.</li>
+                                <li><strong>3. B2B Artha (The Upsell):</strong> A specialised grant-writing module. <strong>Professors directly requested and paid us to build and pilot this tool.</strong> Active paid pilots with the City of Vantaa and Business Tampere. Pricing tiers €2.5k–€20k.</li>
                             </ul>
                         </div>
 
                         <div>
                             <h3 class="font-jakarta text-xl font-bold text-dark-teal mb-2">3. The Grand Finale (The KPIs)</h3>
-                            <p class="text-lg mb-4">Here is how the numbers come together. You’ll see an initial ramp in expenses as we assemble the team. This is deliberate. It builds the capacity that allows our B2B engines (Universities + Artha) to kick in around Month 5 and drive compounding growth.</p>
+                            <p class="text-lg mb-4">The phased Seed structure means a lean H1 2026, ramping team and B2B activity through H2 2026 once Sprint pilots validate institutional demand. Compounding growth begins in 2027 with a fully ramped team.</p>
                             <ul class="list-disc list-inside space-y-2 text-lg">
-                                <li><strong>Runway:</strong> With the robust <strong>€1.7M total funding</strong> (Bridge + Seed) and a phased hiring plan, we have secured a runway of <strong>~24 months</strong>.</li>
-                                <li><strong>Year 1 Goal:</strong> By the end of the first 12 months, we successfully hit our target of ~€330,000 in Annual Recurring Revenue (ARR).</li>
-                                <li><strong>Year 2:</strong> The model continues this logic, showing growth to ~€900,000 ARR by the end of Month 24 as our team is fully ramped.</li>
+                                <li><strong>Runway:</strong> Multi-phase Seed (€1.5M) + Bridge (€200k) + Sprint grant (€100k) delivers ~24 months of runway. The Series A in late 2027 extends to end of 2028.</li>
+                                <li><strong>Year 1 Goal:</strong> By end of Month 12, we hit <strong>~€180,000 ARR</strong> and €180k full-year revenue (B2C base + 5–6 institutional contracts converted from Sprint-funded pilots).</li>
+                                <li><strong>Year 2:</strong> Growth to <strong>~€491,000 ARR</strong> by end of Month 24, with Series A landing in late 2027.</li>
+                                <li><strong>Year 3:</strong> <strong>~€1.15M ARR</strong> by end of Month 36, on track for Series B fundraising.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Guiding Principles Content -->
+                <!-- Guiding Principles -->
                 <div id="principles" class="tab-content">
                     <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">Our GTM & Market Assumptions</h2>
-                    <p class="text-lg mb-6">This is a bottom-up forecast grounded in current traction (~€300 MRR). Revenue is the output of our B2C growth and two B2B engines: University Thesis Support and Artha (Grant Writing).</p>
+                    <p class="text-lg mb-6">Bottom-up forecast grounded in current traction (~€300 MRR, 25,000+ users). Revenue is the output of B2C growth and two B2B engines: University Thesis Support and Artha (Grant Writing), executed across <strong>South Asia and Europe</strong>.</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-light-gray-blue p-4 rounded-lg">
                             <h3 class="font-jakarta font-bold text-teal text-lg">Proprietary Tech Advantage</h3>
-                            <p>We are <strong>not a wrapper</strong>. Our proprietary model delivers high efficiency. With <strong>€195k in Cloud Credits</strong>, our infrastructure costs are effectively zero for Y1-Y3.</p>
+                            <p>We are <strong>not a wrapper</strong>. Our proprietary model trained on student-to-researcher workflow data delivers high efficiency. With <strong>€195k in Cloud Credits</strong>, infrastructure costs are effectively zero for Y1–Y3.</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
                             <h3 class="font-jakarta font-bold text-teal text-lg">The "Lifecycle" Retention Model</h3>
@@ -134,24 +111,29 @@
                             </ul>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
+                            <h3 class="font-jakarta font-bold text-teal text-lg">Dual-Market Strategy</h3>
+                            <p class="text-sm mt-1"><strong class="text-medium-teal">South Asia (co-primary):</strong> 42M+ tertiary students, €50–70M SAM. Lead pilots in India, Nepal, Pakistan.</p>
+                            <p class="text-sm mt-1"><strong class="text-medium-teal">Europe (co-primary):</strong> €20–25B EdTech market, 12% CAGR. Tampere-headquartered, GDPR/EU AI Act compliant.</p>
+                        </div>
+                        <div class="bg-light-gray-blue p-4 rounded-lg">
                             <h3 class="font-jakarta font-bold text-teal text-lg">Unit Economics</h3>
-                            <p class="font-bold text-medium-teal mb-1">CAC Payback < 6 Months</p>
+                            <p class="font-bold text-medium-teal mb-1">CAC Payback &lt; 6 Months</p>
                             <p>Our organic B2C funnel acts as a "paid-for" lead generation engine for B2B, keeping overall customer acquisition costs exceptionally low.</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
                             <h3 class="font-jakarta font-bold text-teal text-lg">B2B Sales Physics (The Math)</h3>
                             <ul class="text-sm mt-1 list-disc list-inside">
-                                <li><strong>Target:</strong> 10 Sales/Year (Year 1)</li>
-                                <li><strong>Required Pipeline:</strong> ~125 Qualified Leads</li>
-                                <li><strong>Conversion Assumptions:</strong> 20% Lead-to-Demo; 50% Demo-to-Pilot; 80% Pilot-to-Close.</li>
+                                <li><strong>Target:</strong> 5–6 Sales/Year (Year 1, post-Sprint pilots)</li>
+                                <li><strong>Required Pipeline:</strong> ~75 Qualified Leads</li>
+                                <li><strong>Conversion:</strong> 20% Lead→Demo; 50% Demo→Pilot; 80% Pilot→Close.</li>
                             </ul>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-jakarta font-bold text-teal text-lg">Artha Pricing Tiers (Hypothesis)</h3>
+                            <h3 class="font-jakarta font-bold text-teal text-lg">Artha Pricing Tiers</h3>
                             <ul class="text-sm mt-1 list-disc list-inside">
                                 <li><strong>Startups (1-3 users):</strong> €2,500 / year</li>
                                 <li><strong>SMEs (up to 5 users):</strong> €5,000 / year</li>
-                                <li><strong>Enterprise:</strong> €10,000 - €20,000 / year</li>
+                                <li><strong>Enterprise:</strong> €10,000 – €20,000 / year</li>
                             </ul>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
@@ -159,26 +141,26 @@
                             <p>€30,000 / year (Thesis System)</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
-                            <h3 class="font-jakarta font-bold text-teal text-lg">Pilot-to-Close Cycle</h3>
-                            <p>4.5 months (average)</p>
-                        </div>
-                        <div class="bg-light-gray-blue p-4 rounded-lg">
                             <h3 class="font-jakarta font-bold text-teal text-lg">Funding Strategy</h3>
-                            <p>€200k (Q4 '25) + <strong>€1.5M Seed</strong> (Q2 '26). Total Capital: €1.7M.</p>
+                            <p class="text-sm">€200k (Q4 '25) + €500k Seed T1 (Q2 '26) + €100k Sprint grant (H2 '26) + €1M Seed T2 (Q4 '26) + <strong>€3M Series A (late '27)</strong>. Total capital deployed by end of Y3: €4.8M.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Use of Funds Content -->
+                <!-- Use of Funds -->
                 <div id="funds" class="tab-content">
                     <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">Hiring Plan & Burn Rate</h2>
                      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <h3 class="font-jakarta font-bold text-teal mb-3 text-lg">Hiring Plan (7 New Roles)</h3>
-                            <p class="mb-2 italic text-sm">Phased rollout across Q2 & Q3:</p>
-                            <ul class="space-y-2 list-disc list-inside text-lg">
+                            <h3 class="font-jakarta font-bold text-teal mb-3 text-lg">Phased Hiring Plan (7 New Roles)</h3>
+                            <p class="mb-2 italic text-sm">Aligned with multi-phase Seed close:</p>
+                            <p class="mt-3 text-base font-bold text-dark-teal">After Seed Tranche 1 (Q2 2026):</p>
+                            <ul class="space-y-1 list-disc list-inside text-base ml-2">
                                 <li>Senior Software Engineers (2)</li>
                                 <li>AI Engineer (1)</li>
+                            </ul>
+                            <p class="mt-3 text-base font-bold text-dark-teal">After Seed Tranche 2 (Q4 2026):</p>
+                            <ul class="space-y-1 list-disc list-inside text-base ml-2">
                                 <li>Sales & Commercial Team (2)</li>
                                 <li>Marketing Operations (1)</li>
                                 <li>UX Designer (1)</li>
@@ -186,23 +168,23 @@
                         </div>
                         <div class="space-y-4">
                             <div class="bg-light-gray-blue border-l-4 border-medium-teal p-4 rounded-r-lg">
-                                <div class="font-jakarta font-bold text-teal">Stabilized Monthly OpEx</div>
+                                <div class="font-jakarta font-bold text-teal">Stabilised Monthly OpEx (Q1 2027+)</div>
                                 <div class="text-2xl font-bold text-dark-teal">~€70,000</div>
                                 <div class="text-sm italic text-gray-500">(Salaries & Operations)</div>
                             </div>
                              <div class="bg-light-gray-blue border-l-4 border-seafoam text-teal p-4 rounded-r-lg">
-                                <div class="font-jakarta font-bold">Calculated Runway</div>
+                                <div class="font-jakarta font-bold">Bridge + Seed + Sprint Runway</div>
                                 <div class="text-2xl font-bold text-dark-teal">~24 Months</div>
+                                <div class="text-sm italic text-gray-500">Series A extends to end of 2028</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Financial Projections Content -->
+                <!-- Projections -->
                 <div id="projections" class="tab-content">
                     <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">3-Year Financial Projections (End of Year)</h2>
                     
-                    <!-- Financial Table -->
                     <div class="overflow-x-auto mb-12">
                         <table class="w-full text-left text-lg">
                             <thead class="bg-light-grey text-base text-dark-teal uppercase font-bold">
@@ -213,13 +195,10 @@
                                     <th scope="col" class="px-6 py-3 text-right rounded-r-lg">Year 3 (2028)</th>
                                 </tr>
                             </thead>
-                            <!-- Table body is now empty and generated by JS to prevent data mismatch -->
-                            <tbody id="financialTableBody">
-                            </tbody>
+                            <tbody id="financialTableBody"></tbody>
                         </table>
                     </div>
 
-                    <!-- Charts -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
                         <div>
                              <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Revenue Growth</h3>
@@ -228,6 +207,7 @@
                         <div>
                             <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Cash Flow & Cumulative Cash</h3>
                             <canvas id="cashflowChart"></canvas>
+                            <p class="text-base text-center mt-1">Seed T2 (Q4 '26) and Series A (late '27) shown as inflows.</p>
                         </div>
                         <div>
                             <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Capital Efficiency</h3>
@@ -242,35 +222,33 @@
                     </div>
                 </div>
 
-                <!-- Key Takeaways Content -->
+                <!-- Key Takeaways -->
                 <div id="takeaways" class="tab-content">
                      <h2 class="font-jakarta text-2xl font-bold text-teal mb-4">Our Investment Thesis</h2>
-                     <p class="text-xl font-bold text-dark-teal mb-6">Our Value Proposition: We leverage a high-engagement B2C product to create a highly qualified, low-cost PQL funnel for our high-value B2B enterprise platforms (Thesis Support & Artha).</p>
+                     <p class="text-xl font-bold text-dark-teal mb-6">Our Value Proposition: We leverage a high-engagement B2C product to create a highly qualified, low-cost PQL funnel for our high-value B2B enterprise platforms (Thesis Support & Artha) across South Asia and Europe.</p>
                      
-                     <!-- Milestones List -->
                      <ul class="space-y-4 text-lg mb-8">
                         <li class="flex items-start">
                             <span class="text-seafoam mr-3 mt-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                             </span>
-                            <span><strong class="text-teal">Phase 1 Goal:</strong> The model projects that we will comfortably exceed our €25k MRR target within 12 months.</span>
+                            <span><strong class="text-teal">Phase 1 Goal:</strong> The model projects exceeding €15k MRR (€180k ARR) within 12 months, driven by Sprint-funded institutional pilots in India, Nepal, and Pakistan.</span>
                         </li>
                          <li class="flex items-start">
                              <span class="text-seafoam mr-3 mt-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                              </span>
                              <div class="flex flex-col">
-                                 <span><strong class="text-teal">Series A Targets (24 Months):</strong></span>
+                                 <span><strong class="text-teal">Series A Targets (Late 2027, ~€3M):</strong></span>
                                  <ul class="list-disc list-inside ml-2 mt-1 text-base text-gray-600">
-                                     <li><strong>€1.5M+ ARR</strong> (Proven Scalability)</li>
-                                     <li><strong>20+ University Logos</strong> (Market Validation)</li>
+                                     <li><strong>€500k+ ARR</strong> on path to €1M (Proven Scalability)</li>
+                                     <li><strong>15+ University Logos</strong> across South Asia and EU (Market Validation)</li>
                                      <li><strong>Lifecycle Upsell Engine</strong> (Proven Retention & Expansion)</li>
                                  </ul>
                              </div>
                          </li>
                      </ul>
 
-                     <!-- Risk Matrix -->
                      <h3 class="font-jakarta text-xl font-bold text-teal mb-3">Risk Assessment & Mitigation</h3>
                      <div class="overflow-hidden border border-gray-200 rounded-lg">
                         <table class="min-w-full bg-white text-base">
@@ -283,15 +261,23 @@
                             <tbody class="divide-y divide-gray-200">
                                 <tr>
                                     <td class="py-3 px-4 font-bold text-gray-700">Long Sales Cycles (Universities)</td>
-                                    <td class="py-3 px-4 text-gray-600"><strong>Revenue Diversification:</strong> Our steady B2C revenue stream provides cash flow continuity, while Artha (departmental budget) offers a faster B2B sales cycle than full university-wide procurements.</td>
+                                    <td class="py-3 px-4 text-gray-600"><strong>Revenue Diversification:</strong> Steady B2C revenue provides cash flow continuity, while Artha (departmental budget) offers a faster B2B sales cycle than full university procurements.</td>
                                 </tr>
                                 <tr>
                                     <td class="py-3 px-4 font-bold text-gray-700">AI Commoditization</td>
-                                    <td class="py-3 px-4 text-gray-600"><strong>Data Moat:</strong> We aren't just an interface. We own the proprietary workflow data from students -> researchers, training our models to be increasingly specific and defensible against generic LLMs.</td>
+                                    <td class="py-3 px-4 text-gray-600"><strong>Data Moat:</strong> Proprietary workflow data from students → researchers trains our models to be increasingly specific and defensible against generic LLMs.</td>
                                 </tr>
                                 <tr>
                                     <td class="py-3 px-4 font-bold text-gray-700">Hiring Delays</td>
-                                    <td class="py-3 px-4 text-gray-600"><strong>Operational Buffer:</strong> Our financial plan assumes a phased, conservative hiring ramp. We have a 6-month buffer in our runway to absorb recruitment timelines without impacting survival.</td>
+                                    <td class="py-3 px-4 text-gray-600"><strong>Phased Hiring:</strong> Seed tranche 1 funds 3 critical engineering hires; tranche 2 unlocks the commercial team. Each phase is gated to milestones, reducing recruitment pressure.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-bold text-gray-700">Seed Closing Risk</td>
+                                    <td class="py-3 px-4 text-gray-600"><strong>Multi-Phase Seed:</strong> Splitting into €500k T1 (Q2 '26) and €1M T2 (Q4 '26) reduces single-event risk. Sprint pilot evidence between tranches strengthens T2 close.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-bold text-gray-700">Series A Risk</td>
+                                    <td class="py-3 px-4 text-gray-600"><strong>Multi-Stage De-risking:</strong> Sprint funding validates South Asian institutional sales before the Seed; Seed proves traction before Series A. Each round is unlocked by hitting milestones from the previous one.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -306,7 +292,6 @@
         // Tab functionality
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
-
         tabs.forEach(tab => {
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -318,209 +303,171 @@
             });
         });
 
-        // Chart.js & Table Data Source
         const euroFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0 });
 
-        // Base Data
-        const revenues = [180000, 615000, 1500000];
-        const arr = [330000, 900000, 2100000];
-        
-        // OpEx (People + Ops)
-        // Year 1 Update: 
-        // Q1 (Lean): 9k * 3 = 27k
-        // Q2-Q4 (Ramp): 70k * 9 = 630k
-        // Total Year 1 = 657k (Rounded to 660k for display)
-        const opex = [660000, 1000000, 1300000]; 
-        
-        // COGS Calculation (Proprietary Model + Credits)
-        // 195k Total Credits.
-        // Year 1: Only Software (3k)
-        // Year 2: Only Software (8k)
-        // Year 3: Credits cover infra. Only Software/Seats (20k)
-        const cogs = [3000, 8000, 20000];
-        
-        // Derived Metrics
+        // ============================================================
+        // SPRINT-ALIGNED + MULTI-PHASE SEED MODEL (2026 — 2028)
+        // ============================================================
+        // Funding stack:
+        //   Q4 2025: €200k Bridge (€100k cash + €100k public grant)
+        //   Q2 2026: €500k Seed Tranche 1
+        //   H2 2026: €100k Business Finland Sprint grant
+        //   Q4 2026: €1M Seed Tranche 2
+        //   Late 2027: €3M Series A
+        // Total deployed by EoY3: €4.8M
+        // ============================================================
+
+        // Core data
+        const revenues = [180000, 336000, 818000];   // recognised revenue per year
+        const arr = [180000, 491000, 1145000];       // exit ARR per year
+        const opex = [390000, 850000, 1100000];      // multi-phase ramp in Y1
+        const cogs = [3000, 8000, 20000];            // post cloud-credits envelope
+        const sprintGrant = 100000;                  // Y1 (offsets operating loss)
+        const seriesA = 3000000;                     // Y2 financing inflow
+
+        // Derived
         const totalCosts = opex.map((op, i) => op + cogs[i]);
         const grossProfit = revenues.map((r, i) => r - cogs[i]);
-        const netProfit = revenues.map((r, i) => r - totalCosts[i]);
-        
-        // Cash Calculation
-        // Total Raised: 1.7M
-        // Less Pre-Seed Burn (Q4 '25): 9k * 3 months = 27,000
-        // Starting Cash Jan 1, 2026: 1,673,000
-        let cash = 1673000;
-        const cumulativeCash = netProfit.map(p => {
-            cash += p;
+        const netProfit = revenues.map((r, i) => {
+            let np = r - totalCosts[i];
+            if (i === 0) np += sprintGrant;
+            return np;
+        });
+
+        // Cash trajectory
+        // Jan 2026 opening: €173k (Bridge €200k less Q4 2025 burn of €27k)
+        // Y1 inflows: Seed T1 €500k + Seed T2 €1M + Sprint €100k + revenue
+        // Y2 inflows: Series A €3M + revenue
+        // Y3 inflows: revenue only
+        let cash = 173000;
+        const seedTranches = [1500000, 0, 0];   // both tranches land in Y1
+        const cumulativeCash = revenues.map((rev, i) => {
+            cash += rev + seedTranches[i] - totalCosts[i];
+            if (i === 0) cash += sprintGrant;
+            if (i === 1) cash += seriesA;
             return cash;
         });
 
         const chartData = {
             labels: ['Year 1 (2026)', 'Year 2 (2027)', 'Year 3 (2028)'],
-            arr: arr,
+            arr,
             totalRevenue: revenues,
-            cogs: cogs,
-            grossProfit: grossProfit,
-            opex: opex,
-            totalCosts: totalCosts,
-            netProfit: netProfit,
-            cumulativeCash: cumulativeCash
+            cogs,
+            grossProfit,
+            opex,
+            totalCosts,
+            netProfit,
+            cumulativeCash,
         };
 
-        // --- REFACTOR START: Dynamic Table Generation ---
+        // Table
         function renderTable() {
             const tbody = document.getElementById('financialTableBody');
             if (!tbody) return;
 
-            // Definition of rows to render
             const rowDefinitions = [
-                { key: 'arr', title: 'Annual Recurring Rev. (ARR)', highlightYear3: 'text-dark-teal' },
-                { key: 'totalRevenue', title: 'Total Revenue' },
-                { key: 'cogs', title: 'COGS (Credits Applied)', isNegative: true, isItalic: true },
+                { key: 'arr', title: 'Annual Recurring Rev. (ARR) — exit', highlightYear3: 'text-dark-teal' },
+                { key: 'totalRevenue', title: 'Recognised Revenue' },
+                { key: 'cogs', title: 'COGS (post Cloud Credits)', isNegative: true, isItalic: true },
                 { key: 'grossProfit', title: 'Gross Profit', highlightYear3: 'text-medium-teal' },
                 { key: 'opex', title: 'OpEx (Team & Ops)', isNegative: true, isItalic: true },
                 { key: 'totalCosts', title: 'Total Costs', isNegative: true, isBold: true },
-                { key: 'netProfit', title: 'Net Profit / (Loss)', highlightYear3: 'text-seafoam' },
-                { key: 'cumulativeCash', title: 'Cumulative Cash', highlightYear3: 'text-seafoam' }
+                { key: 'netProfit', title: 'Net Profit / (Loss)*', highlightYear3: 'text-seafoam' },
+                { key: 'cumulativeCash', title: 'Cumulative Cash**', highlightYear3: 'text-seafoam' },
             ];
 
             tbody.innerHTML = rowDefinitions.map(def => {
                 const data = chartData[def.key];
-                
-                // Helper to format cells
                 const formatCell = (value, index) => {
-                    // Logic for displaying negatives
-                    const isNeg = value < 0 || (def.isNegative && value > 0); 
+                    const isNeg = value < 0 || (def.isNegative && value > 0);
                     const displayVal = def.isNegative && value > 0 ? -value : value;
-                    
                     let formatted = euroFormatter.format(Math.abs(displayVal));
-                    if (isNeg) {
-                        formatted = `(${formatted})`;
-                    }
-                    
-                    // Styling logic
+                    if (isNeg) formatted = `(${formatted})`;
                     let classes = "px-6 py-4 text-right";
                     if (isNeg) classes += " text-red-600";
                     if (index === 2 && def.highlightYear3) classes += ` font-bold ${def.highlightYear3}`;
                     if (def.isItalic) classes += " italic text-gray-500";
                     if (def.isBold) classes += " font-bold text-gray-700";
-
                     return `<td class="${classes}">${formatted}</td>`;
                 };
-
                 return `
                     <tr class="bg-white border-b border-light-grey last:border-0">
                         <th scope="row" class="px-6 py-4 font-bold text-teal whitespace-nowrap ${def.isItalic ? 'italic font-normal pl-10' : ''}">${def.title}</th>
                         ${data.map((val, idx) => formatCell(val, idx)).join('')}
-                    </tr>
-                `;
+                    </tr>`;
             }).join('');
+
+            const footnote = document.createElement('p');
+            footnote.className = 'text-xs italic text-gray-500 mt-3';
+            footnote.innerHTML = '* 2026 Net Profit includes €100k Business Finland Sprint grant. &nbsp; ** Cumulative cash includes Seed Tranche 1 (Q2 \'26), Seed Tranche 2 (Q4 \'26), and Series A (late 2027).';
+            tbody.parentElement.parentElement.appendChild(footnote);
         }
-
-        // Initialize Table
         renderTable();
-        // --- REFACTOR END ---
 
+        // Charts
         Chart.defaults.font.family = "'Inter', sans-serif";
         Chart.defaults.font.weight = 'bold';
-
         const chartOptions = {
              responsive: true,
              maintainAspectRatio: true,
-             scales: { y: { beginAtZero: true, ticks: { callback: (value) => euroFormatter.format(value) } } },
-             plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${euroFormatter.format(context.raw)}` } } }
+             scales: { y: { beginAtZero: true, ticks: { callback: v => euroFormatter.format(v) } } },
+             plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${euroFormatter.format(ctx.raw)}` } } }
         };
-        
-        // 1. Revenue Chart
-        const revenueCtx = document.getElementById('revenueChart');
-        if (revenueCtx) {
-            new Chart(revenueCtx, {
-                type: 'bar',
-                data: {
-                    labels: chartData.labels,
-                    datasets: [
-                        { label: 'Total Revenue', data: chartData.totalRevenue, backgroundColor: '#01949A' },
-                        { label: 'ARR', data: chartData.arr, backgroundColor: '#016367' }
-                    ]
-                },
-                options: chartOptions
-            });
-        }
-        
-        // 2. Cash Flow Chart
-        const cashflowCtx = document.getElementById('cashflowChart');
-        if (cashflowCtx) {
-             new Chart(cashflowCtx, {
-                type: 'bar',
-                data: {
-                    labels: chartData.labels,
-                    datasets: [
-                         {
-                            label: 'Net Profit/(Loss)',
-                            data: chartData.netProfit,
-                            backgroundColor: (context) => context.raw >= 0 ? '#49C3A3' : '#ef4444',
-                         },
-                         {
-                            label: 'Cumulative Cash',
-                            data: chartData.cumulativeCash,
-                            type: 'line',
-                            borderColor: '#016367',
-                            tension: 0.1,
-                            fill: false
-                         }
-                    ]
-                },
-                options: { ...chartOptions, scales: { y: { beginAtZero: false, ticks: { callback: (value) => euroFormatter.format(value) } } } }
-            });
-        }
-        
-        // 3. Capital Efficiency Chart
-        const efficiencyCtx = document.getElementById('efficiencyChart');
-        if (efficiencyCtx) {
-            const newArr = [chartData.arr[0], chartData.arr[1] - chartData.arr[0], chartData.arr[2] - chartData.arr[1]];
-            const efficiencyData = [
-                chartData.totalCosts[0] / newArr[0],
-                chartData.totalCosts[1] / newArr[1],
-                chartData.totalCosts[2] / newArr[2]
-            ];
-            new Chart(efficiencyCtx, {
-                type: 'bar',
-                data: {
-                    labels: chartData.labels,
-                    datasets: [{
-                        label: 'Efficiency Ratio',
-                        data: efficiencyData,
-                        backgroundColor: '#49C3A3'
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${context.raw.toFixed(2)}` } } } }
-            });
-        }
 
-        // 4. Equity Ratio Chart
-        const equityCtx = document.getElementById('equityChart');
-        if (equityCtx) {
-             const loanAmount = 40000;
-             const equityRatioData = chartData.cumulativeCash.map(cash => {
-                if (cash <= 0) return 0; // Avoid division by zero or negative assets
-                const equity = cash - loanAmount;
-                return (equity / cash) * 100;
-             });
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.labels,
+                datasets: [
+                    { label: 'Recognised Revenue', data: chartData.totalRevenue, backgroundColor: '#01949A' },
+                    { label: 'ARR (exit)', data: chartData.arr, backgroundColor: '#016367' },
+                ],
+            },
+            options: chartOptions,
+        });
 
-             new Chart(equityCtx, {
-                type: 'bar',
-                data: {
-                    labels: chartData.labels,
-                    datasets: [{
-                        label: 'Equity Ratio (%)',
-                        data: equityRatioData,
-                        backgroundColor: '#01949A'
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 110, ticks: { callback: (value) => `${value}%` } } }, plugins: { legend: { display: false } } }
-            });
-        }
+        new Chart(document.getElementById('cashflowChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.labels,
+                datasets: [
+                    { label: 'Net Profit/(Loss)', data: chartData.netProfit, backgroundColor: ctx => ctx.raw >= 0 ? '#49C3A3' : '#ef4444' },
+                    { label: 'Cumulative Cash', data: chartData.cumulativeCash, type: 'line', borderColor: '#016367', tension: 0.1, fill: false },
+                ],
+            },
+            options: { ...chartOptions, scales: { y: { beginAtZero: false, ticks: { callback: v => euroFormatter.format(v) } } } },
+        });
+
+        const prevArr2025 = 3600;
+        const newArrDelta = [
+            chartData.arr[0] - prevArr2025,
+            chartData.arr[1] - chartData.arr[0],
+            chartData.arr[2] - chartData.arr[1],
+        ];
+        const efficiencyData = chartData.totalCosts.map((c, i) => c / newArrDelta[i]);
+        new Chart(document.getElementById('efficiencyChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.labels,
+                datasets: [{ label: 'Efficiency Ratio', data: efficiencyData, backgroundColor: '#49C3A3' }],
+            },
+            options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw.toFixed(2)}` } } } },
+        });
+
+        const loanAmount = 40000;
+        const equityRatioData = chartData.cumulativeCash.map(c => {
+            if (c <= 0) return 0;
+            return ((c - loanAmount) / c) * 100;
+        });
+        new Chart(document.getElementById('equityChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.labels,
+                datasets: [{ label: 'Equity Ratio (%)', data: equityRatioData, backgroundColor: '#01949A' }],
+            },
+            options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 110, ticks: { callback: v => `${v}%` } } }, plugins: { legend: { display: false } } },
+        });
     </script>
 
 </body>
 </html>
-
