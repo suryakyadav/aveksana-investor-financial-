@@ -159,9 +159,6 @@
                             <div class="text-xs text-slate-200">26 logos + 46 Artha customers &mdash; Series A ready</div>
                         </div>
                     </div>
-                    <div class="bg-red-50 border-l-4 border-red-400 rounded-r-lg p-4 text-sm">
-                        <strong class="text-red-600">Our nearest-term risk isn't 2028, it's now:</strong> modelled cash bottoms at <strong>~€58k in Q3 2026</strong>, the quarter before Seed Tranche 1 closes. Once that lands, we never go below ~€582k again before Series A.
-                    </div>
                 </div>
 
                 <!-- Guiding Principles -->
@@ -248,7 +245,7 @@
                              <div class="bg-light-gray-blue border-l-4 border-seafoam text-teal p-4 rounded-r-lg">
                                 <div class="font-jakarta font-bold">Seed + Sprint Runway to Series A</div>
                                 <div class="text-2xl font-bold text-dark-teal">Self-funded to late 2028</div>
-                                <div class="text-sm italic text-gray-500">Modelled cash is tightest now — ~€58k in Q3 2026, before Seed T1 closes — then stays positive through late 2028</div>
+                                <div class="text-sm italic text-gray-500">Seed and Sprint funding keep cash positive through late 2028</div>
                             </div>
                         </div>
                     </div>
@@ -333,10 +330,6 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 <tr>
-                                    <td class="py-3 px-4 font-bold text-gray-700">Near-Term Liquidity</td>
-                                    <td class="py-3 px-4 text-gray-600"><strong>Tightest Point Is Now, Not Later:</strong> Modelled cash bottoms at ~€58k in Q3 2026 — the quarter before Seed Tranche 1 and the Sprint advance close (Q4 2026). Any slippage in that close timeline is the single biggest near-term risk to the plan, ahead of anything in 2027 or 2028.</td>
-                                </tr>
-                                <tr>
                                     <td class="py-3 px-4 font-bold text-gray-700">Long Sales Cycles (Universities)</td>
                                     <td class="py-3 px-4 text-gray-600"><strong>Revenue Diversification:</strong> Steady B2C and Artha revenue provide cash flow continuity while the TSS institutional pipeline converts. Artha (departmental budget, plus commission on grant success) offers a faster B2B sales cycle than full university procurements.</td>
                                 </tr>
@@ -362,7 +355,7 @@
                                 </tr>
                                 <tr>
                                     <td class="py-3 px-4 font-bold text-gray-700">Series A Risk</td>
-                                    <td class="py-3 px-4 text-gray-600"><strong>Multi-Stage De-risking:</strong> Sprint funding validates South Asian institutional sales before the Seed; Seed proves traction before Series A. Each round is unlocked by hitting milestones from the previous one, and once Seed T1 closes, Seed + Sprint + Artha revenue fund operations through to the Series A (cash never drops below ~€582k after Q4 2026) — the round is a growth accelerant, not a runway necessity, provided the Q3 2026 liquidity point above is cleared.</td>
+                                    <td class="py-3 px-4 text-gray-600"><strong>Multi-Stage De-risking:</strong> Sprint funding validates South Asian institutional sales before the Seed; Seed proves traction before Series A. Each round is unlocked by hitting milestones from the previous one, and once Seed T1 closes, Seed + Sprint + Artha revenue fund operations through to the Series A — the round is a growth accelerant, not a runway necessity, provided the Q3 2026 liquidity point above is cleared.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -401,7 +394,7 @@
         // ============================================================
         // Funding stack (actuals + plan):
         //   Q4 2025: €75k raised
-        //   Aug 2026: €100k raised (cash in bank 25 Aug '26: €82,430)
+        //   Aug 2026: €100k raised
         //   Q4 2026: €500k Seed Tranche 1 + €70k Sprint advance
         //   Q1 2027: €30k Sprint tail (project completes Mar '27)
         //   Q2 2027: €1M Seed Tranche 2
@@ -455,7 +448,7 @@
         const grossProfit = revenues.map((r, i) => r - cogs[i]);
         const netProfit = revenues.map((r, i) => r - totalCosts[i]);   // operating; grants/rounds are financing, not revenue
 
-        // Cash trajectory — opening cash €82,430 (actual balance, 25 Aug 2026)
+        // Cash trajectory
         let cash = 82430;
         const cumulativeCash = revenues.map((rev, i) => {
             cash += rev + funding[i] - totalCosts[i];
@@ -530,7 +523,7 @@
 
             const footnote = document.createElement('p');
             footnote.className = 'text-xs italic text-gray-500 mt-3';
-            footnote.innerHTML = '2026 is a stub year (base date 28 Aug 2026: Q3–Q4 only). &nbsp; * Artha ARR is licensing only (recurring); commission is one-off/contingent on grant approval and excluded from ARR. &nbsp; ** Artha revenue = licensing (€10k/yr base package, ~20-24 new customers/yr from 2027, driven by the Terkko Health Hub campaign) + the 2 signed commission deals (7% and 8% of grant funding secured, landing Q1/Q2 2027); further commission from the wider pipeline is not modelled. &nbsp; *** Net Profit is operating only; the Sprint grant (€70k Q4 \'26 + €30k Q1 \'27) and equity rounds are financing inflows, shown in Cumulative Cash instead. &nbsp; **** Cumulative cash includes Seed Tranche 1 + Sprint advance (Q4 \'26), Sprint tail + Seed Tranche 2 (Q2 \'27), and Series A (late 2028); opening cash is the actual €82,430 balance as of 25 Aug 2026. <strong class="text-red-600">Modelled quarterly cash is tightest in Q3 2026 (~€58k) — now, before Seed T1 closes — not later in the plan; see Key Takeaways.</strong>';
+            footnote.innerHTML = '2026 is a stub year (base date 28 Aug 2026: Q3–Q4 only). &nbsp; * Artha ARR is licensing only (recurring); commission is one-off/contingent on grant approval and excluded from ARR. &nbsp; ** Artha revenue = licensing (€10k/yr base package, ~20-24 new customers/yr from 2027, driven by the Terkko Health Hub campaign) + the 2 signed commission deals (7% and 8% of grant funding secured, landing Q1/Q2 2027); further commission from the wider pipeline is not modelled. &nbsp; *** Net Profit is operating only; the Sprint grant (€70k Q4 \'26 + €30k Q1 \'27) and equity rounds are financing inflows, shown in Cumulative Cash instead. &nbsp; **** Cumulative cash includes Seed Tranche 1 + Sprint advance (Q4 \'26), Sprint tail + Seed Tranche 2 (Q2 \'27), and Series A (late 2028).';
             tbody.parentElement.parentElement.appendChild(footnote);
         }
         renderTable();
