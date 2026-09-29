@@ -96,7 +96,7 @@
                             <div class="w-6 h-6 mx-auto rounded-full bg-seafoam text-dark-teal flex items-center justify-center font-jakarta font-bold text-xs mb-1">5</div>
                             <div class="font-jakarta text-xl font-extrabold text-white">€3M</div>
                             <div class="text-xs font-bold text-seafoam">Series A</div>
-                            <div class="text-xs text-slate-300">Late 2028</div>
+                            <div class="text-xs text-slate-300">Q1 2028</div>
                         </div>
                     </div>
                     <p class="text-sm text-gray-500 mb-8">Every later round is gated on hitting milestones from the one before it &mdash; ~€4.775M raised across the whole plan.</p>
@@ -182,7 +182,7 @@
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
                             <h3 class="font-jakarta font-bold text-teal text-lg">Dual-Market Strategy</h3>
-                            <p class="text-sm mt-1"><strong class="text-medium-teal">South Asia (co-primary):</strong> 42M+ tertiary students, €50–70M SAM. TSS pilots starting with Kathmandu University (Nepal), NUST (Pakistan) and Pune University (India).</p>
+                            <p class="text-sm mt-1"><strong class="text-medium-teal">South Asia (co-primary):</strong> 42M+ tertiary students, €50–70M SAM. TSS pilots starting with Kathmandu University (Nepal), NUST (Pakistan) and Savitribai Phule Pune University (India).</p>
                             <p class="text-sm mt-1"><strong class="text-medium-teal">Europe (co-primary):</strong> €20–25B EdTech market, 12% CAGR. Tampere-headquartered, GDPR/EU AI Act compliant.</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
@@ -212,7 +212,7 @@
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
                             <h3 class="font-jakarta font-bold text-teal text-lg">Funding Strategy</h3>
-                            <p class="text-sm">€75k (Q4 '25) + €100k (Aug '26) + €500k Seed T1 (Q4 '26) + €100k Sprint grant (advance Q4 '26 / tail Q1 '27) + €1M Seed T2 (Q2 '27) + <strong>€3M Series A (late '28)</strong>. Total capital raised across the plan: ~€4.775M.</p>
+                            <p class="text-sm">€75k (Q4 '25) + €100k (Aug '26) + €500k Seed T1 (Q4 '26) + €100k Sprint grant (advance Q4 '26 / tail Q1 '27) + €1M Seed T2 (Q2 '27) + <strong>€3M Series A (Q1 '28)</strong>. Total capital raised across the plan: ~€4.775M.</p>
                         </div>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                         <div>
                             <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Cash Flow & Cumulative Cash</h3>
                             <canvas id="cashflowChart"></canvas>
-                            <p class="text-base text-center mt-1">Seed T1 + Sprint advance (Q4 '26), Sprint tail + Seed T2 (Q2 '27), and Series A (late '28) shown as inflows.</p>
+                            <p class="text-base text-center mt-1">Seed T1 + Sprint advance (Q4 '26), Sprint tail + Seed T2 (Q2 '27), and Series A (Q1 '28) shown as inflows.</p>
                         </div>
                         <div>
                             <h3 class="font-jakarta text-xl font-bold text-teal mb-2 text-center">Cost Efficiency</h3>
@@ -309,7 +309,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                              </span>
                              <div class="flex flex-col">
-                                 <span><strong class="text-teal">Series A Targets (Late 2028, ~€3M):</strong></span>
+                                 <span><strong class="text-teal">Series A Targets (Q1 2028, ~€3M):</strong></span>
                                  <ul class="list-disc list-inside ml-2 mt-1 text-base text-gray-600">
                                      <li><strong>€500k+ ARR</strong> on path to €1M (Proven Scalability) — modelled at ~€985k total by end of 2028 (TSS ~€525k + Artha ~€460k)</li>
                                      <li><strong>15+ University Logos</strong> across South Asia and EU (Market Validation) — modelled at 26 TSS logos + 46 Artha customers by end of 2028</li>
@@ -398,7 +398,7 @@
         //   Q4 2026: €500k Seed Tranche 1 + €70k Sprint advance
         //   Q1 2027: €30k Sprint tail (project completes Mar '27)
         //   Q2 2027: €1M Seed Tranche 2
-        //   Late 2028 (Q4): €3M Series A
+        //   Q1 2028: €3M Series A
         // Total raised across the plan by EoY3: ~€4.775M
         //
         // TSS assumptions (Assumptions sheet): EU ACV €30k, South Asia ACV
@@ -445,7 +445,7 @@
         const opex = [54000, 588000, 888000];             // company OpEx: real team ramp + Artha's dedicated slice from Q1'27
         const cogs = [379, 5703, 16767];                  // 2.5% of combined (TSS + Artha) revenue
         const funding = [570000, 1030000, 3000000];       // Seed T1+Sprint adv.; Sprint tail+Seed T2; Series A
-        const seriesANote = 3000000;                      // lands late 2028 (Q4) within the Y3 total above
+        const seriesANote = 3000000;                      // lands Q1 2028 within the Y3 total above
 
         // Derived
         const totalCosts = opex.map((op, i) => op + cogs[i]);
@@ -533,7 +533,7 @@
 
             const footnote = document.createElement('p');
             footnote.className = 'text-xs italic text-gray-500 mt-3';
-            footnote.innerHTML = '2026 is a stub year (base date 28 Aug 2026: Q3–Q4 only). &nbsp; * Artha ARR is licensing only (recurring); commission is one-off/contingent on grant approval and excluded from ARR. &nbsp; ** Artha revenue = licensing (€10k/yr base package, ~20-24 new customers/yr from 2027, driven by the Terkko Health Hub campaign) + the 2 signed commission deals (7% and 8% of grant funding secured, landing Q1/Q2 2027); further commission from the wider pipeline is not modelled. &nbsp; *** Net Profit is operating only; the Sprint grant (€70k Q4 \'26 + €30k Q1 \'27) and equity rounds are financing inflows, shown in Cumulative Cash instead. &nbsp; **** Cumulative cash includes Seed Tranche 1 + Sprint advance (Q4 \'26), Sprint tail + Seed Tranche 2 (Q2 \'27), and Series A (late 2028).';
+            footnote.innerHTML = '2026 is a stub year (base date 28 Aug 2026: Q3–Q4 only). &nbsp; * Artha ARR is licensing only (recurring); commission is one-off/contingent on grant approval and excluded from ARR. &nbsp; ** Artha revenue = licensing (€10k/yr base package, ~20-24 new customers/yr from 2027, driven by the Terkko Health Hub campaign) + the 2 signed commission deals (7% and 8% of grant funding secured, landing Q1/Q2 2027); further commission from the wider pipeline is not modelled. &nbsp; *** Net Profit is operating only; the Sprint grant (€70k Q4 \'26 + €30k Q1 \'27) and equity rounds are financing inflows, shown in Cumulative Cash instead. &nbsp; **** Cumulative cash includes Seed Tranche 1 + Sprint advance (Q4 \'26), Sprint tail + Seed Tranche 2 (Q2 \'27), and Series A (Q1 2028).';
             tbody.parentElement.parentElement.appendChild(footnote);
         }
         renderTable();
