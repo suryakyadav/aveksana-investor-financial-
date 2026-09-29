@@ -182,7 +182,7 @@
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
                             <h3 class="font-jakarta font-bold text-teal text-lg">Dual-Market Strategy</h3>
-                            <p class="text-sm mt-1"><strong class="text-medium-teal">South Asia (co-primary):</strong> 42M+ tertiary students, €50–70M SAM. Lead pilots in India, Nepal, Pakistan.</p>
+                            <p class="text-sm mt-1"><strong class="text-medium-teal">South Asia (co-primary):</strong> 42M+ tertiary students, €50–70M SAM. TSS pilots starting with Kathmandu University (Nepal), NUST (Pakistan) and Pune University (India).</p>
                             <p class="text-sm mt-1"><strong class="text-medium-teal">Europe (co-primary):</strong> €20–25B EdTech market, 12% CAGR. Tampere-headquartered, GDPR/EU AI Act compliant.</p>
                         </div>
                         <div class="bg-light-gray-blue p-4 rounded-lg">
@@ -243,9 +243,9 @@
                                 <div class="text-sm italic text-gray-500">(€70k salaries & ops, all 12 roles ramped + ~€4k dedicated Artha engineering)</div>
                             </div>
                              <div class="bg-light-gray-blue border-l-4 border-seafoam text-teal p-4 rounded-r-lg">
-                                <div class="font-jakarta font-bold">Seed + Sprint Runway to Series A</div>
-                                <div class="text-2xl font-bold text-dark-teal">Self-funded to late 2028</div>
-                                <div class="text-sm italic text-gray-500">Seed and Sprint funding keep cash positive through late 2028</div>
+                                <div class="font-jakarta font-bold">Seed + Sprint Runway</div>
+                                <div class="text-2xl font-bold text-dark-teal">Funded through 2028, even at zero revenue</div>
+                                <div class="text-sm italic text-gray-500">Seed and Sprint funding alone cover every modelled cost to the end of 2028, with over €125k left, before any revenue or the Series A</div>
                             </div>
                         </div>
                     </div>
@@ -355,7 +355,7 @@
                                 </tr>
                                 <tr>
                                     <td class="py-3 px-4 font-bold text-gray-700">Series A Risk</td>
-                                    <td class="py-3 px-4 text-gray-600"><strong>Multi-Stage De-risking:</strong> Sprint funding validates South Asian institutional sales before the Seed; Seed proves traction before Series A. Each round is unlocked by hitting milestones from the previous one, and once Seed T1 closes, Seed + Sprint + Artha revenue fund operations through to the Series A — the round is a growth accelerant, not a runway necessity, provided the Q3 2026 liquidity point above is cleared.</td>
+                                    <td class="py-3 px-4 text-gray-600"><strong>Multi-Stage De-risking:</strong> Sprint funding validates South Asian institutional sales before the Seed; Seed proves traction before Series A. Each round is unlocked by hitting milestones from the previous one. Seed and Sprint funding alone cover every modelled cost to the end of 2028, even with zero revenue.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -430,12 +430,16 @@
         // ============================================================
 
         // Core data — 2026 is a stub year (base date 28 Aug 2026: Q3+Q4 only)
-        const tssRevenue = [10148, 63139, 330675];      // TSS recognised revenue per year
+        // TSS split per Aveksana_TSS_3yr_Projection.xlsx (TSS Model sheet): institutional licences, paid pilots and B2C shown separately
+        const tssRevenue = [0, 48750, 319500];           // TSS institutional recognised revenue per year
+        const pilotRevenue = [8000, 8000, 0];            // paid pilots (one-off)
+        const b2cRevenue = [2148, 6389, 11175];          // B2C subscriptions recognised revenue
         const arthaRevenue = [5000, 165000, 340000];     // Artha: license + 2 signed commission deals
-        const revenues = tssRevenue.map((r, i) => r + arthaRevenue[i]);
-        const tssArr = [4761, 146327, 524564];           // TSS ARR (exit) per year
+        const revenues = tssRevenue.map((r, i) => r + pilotRevenue[i] + b2cRevenue[i] + arthaRevenue[i]);
+        const tssArr = [0, 138000, 510000];              // TSS institutional ARR (exit) per year
+        const b2cArr = [4761, 8327, 14564];              // B2C ARR (exit): €300 MRR Aug '26, +15%/quarter
         const arthaArr = [20000, 220000, 460000];        // Artha license ARR (exit) — commission excluded, non-recurring
-        const arr = tssArr.map((r, i) => r + arthaArr[i]);
+        const arr = tssArr.map((r, i) => r + b2cArr[i] + arthaArr[i]);
         const logos = [0, 7, 26];                        // institutional logos (cumulative, exit)
         const arthaCustomers = [2, 22, 46];               // Artha customers (cumulative, exit)
         const opex = [54000, 588000, 888000];             // company OpEx: real team ramp + Artha's dedicated slice from Q1'27
@@ -459,11 +463,14 @@
             labels: ['Year 1 (2026, stub)', 'Year 2 (2027)', 'Year 3 (2028)'],
             arr,
             tssArr,
+            b2cArr,
             arthaArr,
             logos,
             arthaCustomers,
             totalRevenue: revenues,
             tssRevenue,
+            pilotRevenue,
+            b2cRevenue,
             arthaRevenue,
             cogs,
             grossProfit,
@@ -481,10 +488,13 @@
             const rowDefinitions = [
                 { key: 'logos', title: 'TSS Institutional Logos (cumulative, exit)', isCount: true },
                 { key: 'arthaCustomers', title: 'Artha Customers (cumulative, exit)', isCount: true },
-                { key: 'tssArr', title: 'TSS ARR (exit)', isItalic: true },
+                { key: 'tssArr', title: 'TSS Institutional ARR (exit)', isItalic: true },
+                { key: 'b2cArr', title: 'B2C ARR (exit)', isItalic: true },
                 { key: 'arthaArr', title: 'Artha ARR (exit)*', isItalic: true },
                 { key: 'arr', title: 'Total Annual Recurring Rev. (ARR) — exit', highlightYear3: 'text-dark-teal' },
-                { key: 'tssRevenue', title: 'TSS Recognised Revenue', isItalic: true },
+                { key: 'tssRevenue', title: 'TSS Institutional Revenue', isItalic: true },
+                { key: 'pilotRevenue', title: 'Paid Pilot Revenue', isItalic: true },
+                { key: 'b2cRevenue', title: 'B2C Revenue', isItalic: true },
                 { key: 'arthaRevenue', title: 'Artha Recognised Revenue**', isItalic: true },
                 { key: 'totalRevenue', title: 'Total Recognised Revenue' },
                 { key: 'cogs', title: 'COGS (post Cloud Credits)', isNegative: true, isItalic: true },
@@ -544,6 +554,7 @@
                 labels: chartData.labels,
                 datasets: [
                     { label: 'TSS Revenue', data: chartData.tssRevenue, backgroundColor: '#01949A', stack: 'rev' },
+                    { label: 'Pilots + B2C', data: chartData.pilotRevenue.map((v, i) => v + chartData.b2cRevenue[i]), backgroundColor: '#94a3b8', stack: 'rev' },
                     { label: 'Artha Revenue', data: chartData.arthaRevenue, backgroundColor: '#49C3A3', stack: 'rev' },
                     { label: 'Total ARR (exit)', data: chartData.arr, type: 'line', borderColor: '#016367', backgroundColor: '#016367', tension: 0.1, fill: false },
                 ],
